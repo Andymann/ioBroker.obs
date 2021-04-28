@@ -12,6 +12,7 @@ const obs = new OBSWebSocket();
 
 // Load your modules here, e.g.:
 // const fs = require("fs");
+let parentThis;
 
 class Obs extends utils.Adapter {
 
@@ -28,6 +29,7 @@ class Obs extends utils.Adapter {
 		// this.on('objectChange', this.onObjectChange.bind(this));
 		// this.on('message', this.onMessage.bind(this));
 		this.on('unload', this.onUnload.bind(this));
+		parentThis = this;
 	}
 
 	/**
@@ -131,6 +133,7 @@ class Obs extends utils.Adapter {
 		if (state) {
 			// The state was changed
 			this.log.info(`state ${id} changed: ${state.val} (ack = ${state.ack})`);
+			parentThis.changeState(id, state.val, state.ack);
 		} else {
 			// The state was deleted
 			this.log.info(`state ${id} deleted`);
@@ -154,6 +157,14 @@ class Obs extends utils.Adapter {
 	// 		}
 	// 	}
 	// }
+
+	//----Ein State wurde veraendert. wir verarbeiten hier nur ack==FALSE
+	//----d.h.: Aenderungen, die ueber die GUI kommen.
+	//----Wenn das Routing an der Hardware geaendert wird, kommt die info via parseMSG herein.
+	changeState(id, val, ack) {
+		this.log.info('changeState()');
+
+	}
 
 }
 
