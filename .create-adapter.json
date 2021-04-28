@@ -1,0 +1,39 @@
+{
+	"cli": true,
+	"adapterName": "obs",
+	"title": "Open Broadcast Studio",
+	"description": "obs",
+	"keywords": [
+		"obs",
+		"Open Broadcast Studio",
+		"websocket"
+	],
+	"expert": "no",
+	"features": [
+		"adapter"
+	],
+	"adminFeatures": [],
+	"type": "multimedia",
+	"startMode": "daemon",
+	"connectionType": "local",
+	"dataSource": "push",
+	"connectionIndicator": "no",
+	"language": "JavaScript",
+	"adminReact": "no",
+	"tools": [
+		"ESLint",
+		"type checking"
+	],
+	"indentation": "Tab",
+	"quotes": "single",
+	"es6class": "yes",
+	"authorName": "Andy Fischer",
+	"authorGithub": "Andymann",
+	"authorEmail": "info@Andyland.info",
+	"gitRemoteProtocol": "HTTPS",
+	"gitCommit": "no",
+	"license": "MIT License",
+	"ci": "gh-actions",
+	"dependabot": "no",
+	"creatorVersion": "1.33.0"
+}

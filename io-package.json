@@ -1,0 +1,76 @@
+{
+	"common": {
+		"name": "obs",
+		"version": "0.0.1",
+		"news": {
+			"0.0.1": {
+				"en": "initial release",
+				"de": "Erstveröffentlichung",
+				"ru": "Начальная версия",
+				"pt": "lançamento inicial",
+				"nl": "Eerste uitgave",
+				"fr": "Première version",
+				"it": "Versione iniziale",
+				"es": "Versión inicial",
+				"pl": "Pierwsze wydanie",
+				"zh-cn": "首次出版"
+			}
+		},
+		"titleLang": {
+			"en": "Open Broadcast Studio",
+			"de": "Öffnen Sie Broadcast Studio",
+			"ru": "Студия открытого вещания",
+			"pt": "Open Broadcast Studio",
+			"nl": "Open Broadcast Studio",
+			"fr": "Ouvrez Broadcast Studio",
+			"it": "Apri Broadcast Studio",
+			"es": "Open Broadcast Studio",
+			"pl": "Otwórz Broadcast Studio",
+			"zh-cn": "开放广播工作室"
+		},
+		"desc": {
+			"en": "obs",
+			"de": "obs",
+			"ru": "Наблюдения",
+			"pt": "obs",
+			"nl": "obs",
+			"fr": "obs",
+			"it": "oss",
+			"es": "obs",
+			"pl": "obs",
+			"zh-cn": "肥胖"
+		},
+		"authors": [
+			"Andy Fischer <info@Andyland.info>"
+		],
+		"keywords": [
+			"obs",
+			"Open Broadcast Studio",
+			"websocket"
+		],
+		"license": "MIT",
+		"platform": "Javascript/Node.js",
+		"icon": "obs.png",
+		"enabled": true,
+		"extIcon": "https://raw.githubusercontent.com/Andymann/ioBroker.obs/master/admin/obs.png",
+		"readme": "https://github.com/Andymann/ioBroker.obs/blob/master/README.md",
+		"loglevel": "info",
+		"mode": "daemon",
+		"type": "multimedia",
+		"compact": true,
+		"connectionType": "local",
+		"dataSource": "push",
+		"materialize": true,
+		"dependencies": [
+			{
+				"js-controller": ">=2.0.0"
+			}
+		]
+	},
+	"native": {
+		"option1": true,
+		"option2": "42"
+	},
+	"objects": [],
+	"instanceObjects": []
+}
