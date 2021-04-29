@@ -224,9 +224,8 @@ class Obs extends utils.Adapter {
 
 	connectOBS() {
 		this.log.info('connectOBS()');
-		var tmpConnection = getIdByName('Connection');
-		var a = getState(tmpConnection).val;
-		this.log.info('connectOBS():' + a.toString());
+		var tmpConnection = this.getState('Connection');
+		this.log.info('connectOBS():' + tmpConnection.toString());
 
 
 	}
