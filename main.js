@@ -229,13 +229,20 @@ class Obs extends utils.Adapter {
 
 
 	getVersion() {
-		//this.log.info('OBS Websocket Version:' + obs.send('GetVersion'));
+		// --- Todo. Wenn das steht, ... top
 		this.log.info('getVersion()');
 		obs.send('GetVersion').then(data => {
 			parentThis.log.info('version:' + data.val);
 		}).catch(error => {
 			parentThis.log.error('getVersion(): Error:' + error.val);
 		});
+	}
+
+	setPingSchedule() {
+		this.log.info('setPingSchedule()');
+		var query = setTimeout(function () {
+			parentThis.log.info('ping');
+		}, 1000);
 	}
 
 	async connectOBS() {
@@ -285,6 +292,7 @@ class Obs extends utils.Adapter {
 			obs.connect({ address: this.config.Hostname + ':' + this.config.Port }).then(() => {
 				parentThis.log.info('connected');
 				this.setStateAsync('Connection', true);
+				this.setPingSchedule();
 				return obs.send('GetVersion');
 			}).then(data => {
 				parentThis.log.info('Version:' + Object.values(data));
