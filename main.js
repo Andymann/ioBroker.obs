@@ -240,7 +240,7 @@ class Obs extends utils.Adapter {
 
 	setPingSchedule() {
 		this.log.info('setPingSchedule()');
-		var query = setTimeout(function () {
+		var query = setInterval(function () {
 			parentThis.log.info('ping');
 		}, 1000);
 	}
