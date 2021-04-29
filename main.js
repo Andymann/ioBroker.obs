@@ -190,12 +190,12 @@ class Obs extends utils.Adapter {
 
 
 	async createSceneList() {
-		this.log.info('createSceneList():' + objScenes[1]);
+		//this.log.info('createSceneList():' + objScenes[1]);
 		this.log.info('createSceneList():' + Object.values(objScenes));
 
 
 		var options = [];
-		for (var i = 0; i < objScenes.length; i++) {
+		for (var i = 0; i < Object.keys(objScenes).length; i++) {
 			var opt = { 'value': i.toString(), 'label': 'asd' };
 			options.push(opt);
 		}
