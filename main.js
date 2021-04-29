@@ -268,7 +268,7 @@ class Obs extends utils.Adapter {
 			obs.connect({ address: this.config.Hostname + ':' + this.config.Port }).then(() => {
 				parentThis.log.info('connected');
 			}).catch((error) => {
-				parentThis.log.error(error);
+				parentThis.log.error('error');
 			});
 		}
 
