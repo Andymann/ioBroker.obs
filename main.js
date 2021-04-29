@@ -183,7 +183,7 @@ class Obs extends utils.Adapter {
 	async createStates() {
 		this.log.info('createStates()');
 
-		await this.setObjectAsync('Connection', {
+		await this.setObjectAsync('obsConnection', {
 			type: 'state',
 			common: {
 				name: 'Connection',
@@ -195,7 +195,7 @@ class Obs extends utils.Adapter {
 			native: {},
 		});
 
-		let tmp = await this.getStateAsync('Connection');
+		let tmp = await this.getStateAsync('obsConnection');
 		this.log.info('createStates():' + tmp.toString());
 		/*
 		await this.setObjectNotExistsAsync('Hostname', {
