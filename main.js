@@ -199,26 +199,26 @@ class Obs extends utils.Adapter {
 
 
 
-
-		// Kombinatinen von Ein- und Ausgang
-		// ausgehend vom Ausgang ('Ausgang x bekommt Signal von Eingang y')
-		await this.setObjectAsync('SceneList', {
-			type: 'state',
-			common: {
-				name: 'Output ' + (i + 1).toString().padStart(2, '0') + ' gets Signal from',
-				type: 'number',
-				//states: inputNames,
-				role: 'list',
-				read: true,
-				write: true
-			},
-			// Next up: addOn for using the Selection Wdiget in HABPanel
-			stateDescription: {
-				options
-			},
-			native: {},
-		});
-
+		/*
+				// Kombinatinen von Ein- und Ausgang
+				// ausgehend vom Ausgang ('Ausgang x bekommt Signal von Eingang y')
+				await this.setObjectAsync('SceneList', {
+					type: 'state',
+					common: {
+						name: 'Output ' + (i + 1).toString().padStart(2, '0') + ' gets Signal from',
+						type: 'number',
+						//states: inputNames,
+						role: 'list',
+						read: true,
+						write: true
+					},
+					// Next up: addOn for using the Selection Wdiget in HABPanel
+					stateDescription: {
+						options
+					},
+					native: {},
+				});
+		*/
 	}
 
 	async createStates() {
@@ -349,10 +349,8 @@ class Obs extends utils.Adapter {
 					for (var i = 0; i < data.scenes.length; i++) {
 						parentThis.objScenes[i] = data.scenes[i].name;
 					}
-
-
 					parentThis.log.info('List of Scenes:' + data.scenes.length);
-					parentThis.log.info('List of Scenes:' + Object.keys(parentThis.objScenes).length);
+					//parentThis.log.info('List of Scenes:' + Object.keys(parentThis.objScenes).length);
 					parentThis.createSceneList();
 				}).catch(error => {
 					parentThis.log.error('connectObs(): Error. Waiting 5 seconds before next try');
