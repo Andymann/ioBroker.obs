@@ -316,6 +316,10 @@ class Obs extends utils.Adapter {
 		clearInterval(pingQuery);
 		obs.disconnect();
 		await this.setStateAsync('Connection', false);
+		this.log.info('waiting 5 seconds before reconnect');
+		var x = setTimeout(function () {
+			parentThis.connectOBS();
+		}, 5000);
 	}
 
 	//----Ein State wurde veraendert. wir verarbeiten hier nur ack==FALSE
