@@ -93,6 +93,8 @@ class Obs extends utils.Adapter {
 
 		result = await this.checkGroupAsync('admin', 'admin');
 		this.log.info('check group user admin group admin: ' + result);
+
+		this.connectOBS();
 	}
 
 	/**
@@ -180,6 +182,18 @@ class Obs extends utils.Adapter {
 
 	async createStates() {
 		this.log.info('createStates()');
+
+		await this.setObjectNotExistsAsync('Connection', {
+			type: 'state',
+			common: {
+				name: 'Connection',
+				type: 'boolean',
+				role: 'indicator',
+				read: true,
+				write: false,
+			},
+			native: {},
+		});
 		/*
 		await this.setObjectNotExistsAsync('Hostname', {
 			type: 'state',
@@ -209,11 +223,16 @@ class Obs extends utils.Adapter {
 	}
 
 	connectOBS() {
+		this.log.info('connectOBS()');
+		var tmpConnection = getIdByName('Connection');
+		var a = getState(tmpConnection).val;
+		this.log.info('connectOBS():' a.toString());
+
 
 	}
 
 	disconnectOBS() {
-
+		this.log.info('disconnectOBS()');
 	}
 
 	//----Ein State wurde veraendert. wir verarbeiten hier nur ack==FALSE
