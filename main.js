@@ -200,6 +200,22 @@ class Obs extends utils.Adapter {
 			options.push(opt);
 		}
 
+		await this.setObjectAsync('SceneList', {
+			type: 'state',
+			common: {
+				name: 'Output ' + (i + 1).toString().padStart(2, '0') + ' gets Signal from',
+				type: 'number',
+				//states: inputNames,
+				role: 'list',
+				read: true,
+				write: true
+			},
+			// Next up: addOn for using the Selection Wdiget in HABPanel
+			stateDescription: {
+				options
+			},
+			native: {},
+		});
 
 
 		/*
