@@ -234,7 +234,7 @@ class Obs extends utils.Adapter {
 		obs.send('GetVersion').then(data => {
 			parentThis.log.info('version:' + data.toString());
 		}).catch(error => {
-			parentThis.log.error('getVersion(): Error:' + error.toString());
+			parentThis.log.error('getVersion(): Error:' + error.val);
 		});
 	}
 
