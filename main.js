@@ -309,9 +309,9 @@ class Obs extends utils.Adapter {
 
 
 			obs.send('GetCurrentProfile').then(data => {
-				parentThis.log.info('Current Profile:' + data['profile-name']);
+				parentThis.log.info('Current Profile:' + data);
 			}).catch(error => {
-				parentThis.log.error('GetCurrentProfile(): Error. Waiting 5 seconds before next try');
+				parentThis.log.error('GetCurrentProfile()');
 			});
 
 			obs.on('SwitchScenes', data => {
