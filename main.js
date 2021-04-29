@@ -14,6 +14,7 @@ let obs;
 // const fs = require("fs");
 let parentThis;
 let pingQuery;
+let sActiveScene = '';
 
 
 class Obs extends utils.Adapter {
@@ -199,6 +200,19 @@ class Obs extends utils.Adapter {
 			native: {},
 		});
 
+		await this.setObjectAsync('ActiveScene', {
+			type: 'state',
+			common: {
+				name: 'ActiveScene',
+				type: 'string',
+				role: 'text',
+				read: true,
+				write: false
+				//def: false
+			},
+			native: {},
+		});
+
 		//let tmp = await this.getStateAsync('obsConnection');
 		//this.log.info('createStates():' + tmp.val);
 		/*
@@ -273,6 +287,7 @@ class Obs extends utils.Adapter {
 				}).then(data => {
 					//parentThis.log.info('Version:' + Object.values(data));
 					parentThis.log.info('Current Scene:' + data.name);
+					parentThis.setStateAsync('ActiveScene', data.name);
 				}).catch(error => {
 					parentThis.log.error('connectObs(): Error. Waiting 5 seconds before next try');
 				});
@@ -281,6 +296,8 @@ class Obs extends utils.Adapter {
 
 			obs.on('SwitchScenes', data => {
 				this.log.info('New Active Scene:' + data.sceneName);
+				parentThis.setStateAsync('ActiveScene', data.name);
+
 			});
 
 			/*
