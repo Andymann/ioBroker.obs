@@ -255,7 +255,7 @@ class Obs extends utils.Adapter {
 					});
 				})
 				.catch(err => { // Promise convention dicates you have a catch on every chain.
-					parentThis.log.info(err);
+					parentThis.log.error('connectOBS():' + err.val);
 				});
 		}
 
