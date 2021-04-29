@@ -347,7 +347,7 @@ class Obs extends utils.Adapter {
 				}).then(data => {
 					//parentThis.log.info('List of Scenes:' + data.scenes.length);
 					for (var i = 0; i < data.scenes.length; i++) {
-						parentThis.objScenes[i] = data.scenes[i].name;
+						objScenes[i] = data.scenes[i].name;
 					}
 					parentThis.log.info('List of Scenes:' + data.scenes.length);
 					//parentThis.log.info('List of Scenes:' + Object.keys(parentThis.objScenes).length);
