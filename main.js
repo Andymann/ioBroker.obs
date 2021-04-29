@@ -243,7 +243,7 @@ class Obs extends utils.Adapter {
 
 
 		let tmp = await this.getStateAsync('Connection');
-		this.log.info('connectOBS():' + tmp.val);
+		//this.log.info('connectOBS():' + tmp.val);
 		if (tmp.val == false) {
 			/*
 			obs.connect({
@@ -271,10 +271,23 @@ class Obs extends utils.Adapter {
 					parentThis.log.error('connectOBS(): Verbindungsversuch nicht erfolgreich.' + err);
 				});
 				*/
+
+			/*
 			obs.connect({ address: this.config.Hostname + ':' + this.config.Port }).then(() => {
 				parentThis.log.info('connected');
 				this.setStateAsync('Connection', true);
 				this.getVersion();
+			}).catch(error => {
+				parentThis.log.error('error');
+			});
+			*/
+
+			obs.connect({ address: this.config.Hostname + ':' + this.config.Port }).then(() => {
+				parentThis.log.info('connected');
+				this.setStateAsync('Connection', true);
+				return obs.send('GetSceneList');
+			}).then(data => {
+				parentThis.log.info('Version:' + data.version + ';');
 			}).catch(error => {
 				parentThis.log.error('error');
 			});
