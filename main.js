@@ -263,9 +263,9 @@ class Obs extends utils.Adapter {
 			clearInterval(pingQuery);
 			var connectInterval = setInterval(function () {
 				obs.connect({ address: parentThis.config.Hostname + ':' + parentThis.config.Port }).then(() => {
-					parentThis.log.info('connected');
+					parentThis.log.info('connectOBS(): connected');
 					parentThis.setStateAsync('Connection', true);
-					parentThis.clearInterval(connectInterval);
+					clearInterval(connectInterval);
 					parentThis.setPingSchedule();
 					return obs.send('GetVersion');
 				}).then(data => {
