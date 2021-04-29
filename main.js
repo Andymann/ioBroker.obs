@@ -190,8 +190,7 @@ class Obs extends utils.Adapter {
 
 
 	async createSceneList() {
-		this.log.info('createSceneList()');
-
+		this.log.info('createSceneList():' + objScenes.length);
 		var options = [];
 		for (var i = 0; i < objScenes.length; i++) {
 			var opt = { 'value': i.toString(), 'label': 'asd' };
@@ -203,7 +202,7 @@ class Obs extends utils.Adapter {
 
 		// Kombinatinen von Ein- und Ausgang
 		// ausgehend vom Ausgang ('Ausgang x bekommt Signal von Eingang y')
-		await this.setObjectAsync('SelectMapping.output_' + (i + 1).toString().padStart(2, '0') + '_in_from', {
+		await this.setObjectAsync('SceneList', {
 			type: 'state',
 			common: {
 				name: 'Output ' + (i + 1).toString().padStart(2, '0') + ' gets Signal from',
@@ -348,7 +347,7 @@ class Obs extends utils.Adapter {
 				}).then(data => {
 					//parentThis.log.info('List of Scenes:' + data.scenes.length);
 					for (var i = 0; i < data.scenes.length; i++) {
-						objScenes[i] = data.scenes[i].name;
+						parentThis.objScenes[i] = data.scenes[i].name;
 					}
 					parentThis.log.info('List of Scenes:' + data.scenes.length);
 					parentThis.createSceneList();
