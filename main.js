@@ -322,7 +322,11 @@ class Obs extends utils.Adapter {
 				}).then(() => {
 					return obs.send('GetSceneList');
 				}).then(data => {
-					parentThis.log.info('List of Scenes:' + data.scenes.length);
+					//parentThis.log.info('List of Scenes:' + data.scenes.length);
+					for (var i = 0; i < data.scenes.length; i++) {
+						lstScenes += data.scenes[i] + ';';
+					}
+					parentThis.log.info('List of Scenes:' + data.scenes.length + ':' + lstScenes);
 					// .... lstScenes  ...  
 				}).catch(error => {
 					parentThis.log.error('connectObs(): Error. Waiting 5 seconds before next try');
