@@ -276,10 +276,11 @@ class Obs extends utils.Adapter {
 				});
 			}, 5000);
 
+			/*
 			obs.on('SwitchScenes', data => {
 				this.log.info('New Active Scene:' + data.sceneName);
 			});
-
+			*/
 			// You must add this handler to avoid uncaught exceptions.
 			obs.on('error', err => {
 				console.error('socket error:', err);
