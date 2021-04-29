@@ -354,7 +354,7 @@ class Obs extends utils.Adapter {
 					for (var i = 0; i < data.scenes.length; i++) {
 						objScenes[i] = data.scenes[i].name;
 					}
-					parentThis.log.info('List of Scenes:' + data.scenes.length);
+					//parentThis.log.info('List of Scenes:' + data.scenes.length);
 					//parentThis.log.info('List of Scenes:' + Object.keys(parentThis.objScenes).length);
 					parentThis.createSceneList();
 				}).catch(error => {
@@ -455,7 +455,8 @@ class Obs extends utils.Adapter {
 	//----d.h.: Aenderungen, die ueber die GUI kommen.
 	//----Wenn das Routing an der Hardware geaendert wird, kommt die info via parseMSG herein.
 	changeState(id, val, ack) {
-		this.log.info('changeState()');
+		this.log.info('changeState(). id:' + id + '  val:' + val + '  ack:' + ack);
+
 
 	}
 
