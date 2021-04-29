@@ -196,7 +196,7 @@ class Obs extends utils.Adapter {
 
 		var options = [];
 		for (var i = 0; i < Object.keys(objScenes).length; i++) {
-			var opt = { 'value': i.toString(), 'label': 'asd' };
+			var opt = { 'value': i.toString(), 'label': objScenes[i] };
 			options.push(opt);
 		}
 
