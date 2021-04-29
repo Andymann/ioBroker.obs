@@ -108,7 +108,7 @@ class Obs extends utils.Adapter {
 			// clearTimeout(timeout2);
 			// ...
 			// clearInterval(interval1);
-
+			this.disconnectOBS();
 			callback();
 		} catch (e) {
 			callback();
