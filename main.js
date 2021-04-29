@@ -281,10 +281,12 @@ class Obs extends utils.Adapter {
 				this.log.info('New Active Scene:' + data.sceneName);
 			});
 			*/
+			/*
 			// You must add this handler to avoid uncaught exceptions.
 			obs.on('error', err => {
 				console.error('socket error:', err);
 			});
+			*/
 		} else {
 			this.log.info('connectOBS(): Alredy connected');
 		}
