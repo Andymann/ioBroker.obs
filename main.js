@@ -183,7 +183,7 @@ class Obs extends utils.Adapter {
 	async createStates() {
 		this.log.info('createStates()');
 
-		await this.setObjectAsync('obsConnection', {
+		await this.setObjectAsync('Connection', {
 			type: 'state',
 			common: {
 				name: 'Connection',
@@ -230,7 +230,7 @@ class Obs extends utils.Adapter {
 		this.log.info('connectOBS()');
 
 
-		let tmp = await this.getStateAsync('obsConnection');
+		let tmp = await this.getStateAsync('Connection');
 		this.log.info('connectOBS():' + tmp.val);
 		if (tmp.val == false) {
 			obs.connect({
@@ -238,6 +238,7 @@ class Obs extends utils.Adapter {
 			})
 				.then(() => {
 					parentThis.log.info('Success! We are connected & authenticated.');
+					this.setStateAsync('Connection', true);
 					return obs.send('GetSceneList');
 				})
 				.then(data => {
@@ -263,9 +264,10 @@ class Obs extends utils.Adapter {
 
 	}
 
-	disconnectOBS() {
+	async disconnectOBS() {
 		this.log.info('disconnectOBS()');
 		obs.disconnect();
+		await this.setStateAsync('Connection', true);
 	}
 
 	//----Ein State wurde veraendert. wir verarbeiten hier nur ack==FALSE
