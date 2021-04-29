@@ -283,10 +283,10 @@ class Obs extends utils.Adapter {
 
 	async disconnectOBS() {
 		this.log.info('disconnectOBS()');
-		clearInterval(this.pingQuery);
+		clearInterval(pingQuery);
 		obs.disconnect();
 		await this.setStateAsync('Connection', false);
-		this.log.info('waiting 5 seconds before reconnect');
+		this.log.info('waiting 5 seconds before trying to reconnect');
 		var x = setTimeout(function () {
 			parentThis.connectOBS();
 		}, 5000);
