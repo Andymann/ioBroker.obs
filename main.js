@@ -29,8 +29,12 @@ class Obs extends utils.Adapter {
 		// this.on('objectChange', this.onObjectChange.bind(this));
 		// this.on('message', this.onMessage.bind(this));
 		this.on('unload', this.onUnload.bind(this));
+
+		this.on('error', this.onError.bind(this));
 		parentThis = this;
 	}
+
+
 
 	/**
 	 * Is called when databases are connected and adapter received configuration.
@@ -59,6 +63,8 @@ class Obs extends utils.Adapter {
 			},
 			native: {},
 		});
+
+		this.createStates();
 
 		// In order to get state updates, you need to subscribe to them. The following line adds a subscription for our variable we have created above.
 		this.subscribeStates('testVariable');
@@ -107,68 +113,122 @@ class Obs extends utils.Adapter {
 		}
 	}
 
-	// If you need to react to object changes, uncomment the following block and the corresponding line in the constructor.
-	// You also need to subscribe to the objects with `this.subscribeObjects`, similar to `this.subscribeStates`.
-	// /**
-	//  * Is called if a subscribed object changes
-	//  * @param {string} id
-	//  * @param {ioBroker.Object | null | undefined} obj
-	//  */
-	// onObjectChange(id, obj) {
-	// 	if (obj) {
-	// 		// The object was changed
-	// 		this.log.info(`object ${id} changed: ${JSON.stringify(obj)}`);
-	// 	} else {
-	// 		// The object was deleted
-	// 		this.log.info(`object ${id} deleted`);
-	// 	}
-	// }
+	onError(callback) {
+		try {
+			// Here you must clear all timeouts or intervals that may still be active
+			// clearTimeout(timeout1);
+			// clearTimeout(timeout2);
+			// ...
+			// clearInterval(interval1);
 
-	/**
-	 * Is called if a subscribed state changes
-	 * @param {string} id
-	 * @param {ioBroker.State | null | undefined} state
-	 */
-	onStateChange(id, state) {
-		if (state) {
-			// The state was changed
-			this.log.info(`state ${id} changed: ${state.val} (ack = ${state.ack})`);
-			parentThis.changeState(id, state.val, state.ack);
-		} else {
-			// The state was deleted
-			this.log.info(`state ${id} deleted`);
+			callback();
+		} catch (e) {
+			callback();
 		}
+
+
+		// If you need to react to object changes, uncomment the following block and the corresponding line in the constructor.
+		// You also need to subscribe to the objects with `this.subscribeObjects`, similar to `this.subscribeStates`.
+		// /**
+		//  * Is called if a subscribed object changes
+		//  * @param {string} id
+		//  * @param {ioBroker.Object | null | undefined} obj
+		//  */
+		// onObjectChange(id, obj) {
+		// 	if (obj) {
+		// 		// The object was changed
+		// 		this.log.info(`object ${id} changed: ${JSON.stringify(obj)}`);
+		// 	} else {
+		// 		// The object was deleted
+		// 		this.log.info(`object ${id} deleted`);
+		// 	}
+		// }
+
+		/**
+		 * Is called if a subscribed state changes
+		 * @param {string} id
+		 * @param {ioBroker.State | null | undefined} state
+		 */
+		onStateChange(id, state) {
+			if (state) {
+				// The state was changed
+				this.log.info(`state ${id} changed: ${state.val} (ack = ${state.ack})`);
+				parentThis.changeState(id, state.val, state.ack);
+			} else {
+				// The state was deleted
+				this.log.info(`state ${id} deleted`);
+			}
+		}
+
+		// If you need to accept messages in your adapter, uncomment the following block and the corresponding line in the constructor.
+		// /**
+		//  * Some message was sent to this instance over message box. Used by email, pushover, text2speech, ...
+		//  * Using this method requires "common.messagebox" property to be set to true in io-package.json
+		//  * @param {ioBroker.Message} obj
+		//  */
+		// onMessage(obj) {
+		// 	if (typeof obj === 'object' && obj.message) {
+		// 		if (obj.command === 'send') {
+		// 			// e.g. send email or pushover or whatever
+		// 			this.log.info('send command');
+
+		// 			// Send response in callback if required
+		// 			if (obj.callback) this.sendTo(obj.from, obj.command, 'Message received', obj.callback);
+		// 		}
+		// 	}
+		// }
+
+		createStates(){
+			this.log.info('createStates()');
+			await this.setObjectNotExistsAsync('Hostname', {
+				type: 'state',
+				common: {
+					name: 'Localhost',
+					type: 'string',
+					role: 'text',
+					read: true,
+					write: true,
+					def: 'Localhost'
+				},
+				native: {},
+			});
+			await this.setObjectNotExistsAsync('Port', {
+				type: 'state',
+				common: {
+					name: 'Port',
+					type: 'string',
+					role: 'text',
+					read: true,
+					write: true,
+					def: '4444'
+				},
+				native: {},
+			});
+
+
+
+
+		}
+
+		connectOBS() {
+
+		}
+
+		disconnectOBS() {
+
+		}
+
+		//----Ein State wurde veraendert. wir verarbeiten hier nur ack==FALSE
+		//----d.h.: Aenderungen, die ueber die GUI kommen.
+		//----Wenn das Routing an der Hardware geaendert wird, kommt die info via parseMSG herein.
+		changeState(id, val, ack) {
+			this.log.info('changeState()');
+
+		}
+
 	}
 
-	// If you need to accept messages in your adapter, uncomment the following block and the corresponding line in the constructor.
-	// /**
-	//  * Some message was sent to this instance over message box. Used by email, pushover, text2speech, ...
-	//  * Using this method requires "common.messagebox" property to be set to true in io-package.json
-	//  * @param {ioBroker.Message} obj
-	//  */
-	// onMessage(obj) {
-	// 	if (typeof obj === 'object' && obj.message) {
-	// 		if (obj.command === 'send') {
-	// 			// e.g. send email or pushover or whatever
-	// 			this.log.info('send command');
-
-	// 			// Send response in callback if required
-	// 			if (obj.callback) this.sendTo(obj.from, obj.command, 'Message received', obj.callback);
-	// 		}
-	// 	}
-	// }
-
-	//----Ein State wurde veraendert. wir verarbeiten hier nur ack==FALSE
-	//----d.h.: Aenderungen, die ueber die GUI kommen.
-	//----Wenn das Routing an der Hardware geaendert wird, kommt die info via parseMSG herein.
-	changeState(id, val, ack) {
-		this.log.info('changeState()');
-
-	}
-
-}
-
-if (require.main !== module) {
+	if(require.main !== module) {
 	// Export the constructor in compact mode
 	/**
 	 * @param {Partial<utils.AdapterOptions>} [options={}]
