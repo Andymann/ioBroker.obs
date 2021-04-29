@@ -239,6 +239,7 @@ class Obs extends utils.Adapter {
 		let tmp = await this.getStateAsync('Connection');
 		this.log.info('connectOBS():' + tmp.val);
 		if (tmp.val == false) {
+			/*
 			obs.connect({
 				address: this.config.Hostname + ':' + this.config.Port
 			})
@@ -261,8 +262,14 @@ class Obs extends utils.Adapter {
 					});
 				})
 				.catch(err => { // Promise convention dicates you have a catch on every chain.
-					parentThis.log.error('connectOBS(): Verbindungsv erscuh nicht erfolgreich' + err.val);
+					parentThis.log.error('connectOBS(): Verbindungsversuch nicht erfolgreich.' + err);
 				});
+				*/
+			obs.connect({ address: this.config.Hostname + ':' + this.config.Port }).then(() => {
+				parentThis.log.info('connected');
+			}).catch((error) => {
+				parentThis.log.error(error);
+			});
 		}
 
 
