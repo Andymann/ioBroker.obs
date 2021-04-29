@@ -244,6 +244,7 @@ class Obs extends utils.Adapter {
 			parentThis.log.info('ping');
 			obs.send('GetVersion').then(data => {
 				parentThis.log.info('Ping Version:' + Object.values(data));
+				parentThis.log.info('Ping Version:' + data.length);
 			}).catch(error => {
 				parentThis.log.error('Ping error');
 			});
