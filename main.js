@@ -222,9 +222,9 @@ class Obs extends utils.Adapter {
 		*/
 	}
 
-	connectOBS() {
+	async connectOBS() {
 		this.log.info('connectOBS()');
-		var tmpConnection = this.getState('Connection');
+		var tmpConnection = await this.getStateAsync('obs.0.Connection');
 		this.log.info('connectOBS():' + tmpConnection.toString());
 
 
