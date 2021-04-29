@@ -190,7 +190,7 @@ class Obs extends utils.Adapter {
 
 
 	async createSceneList() {
-		this.log.info('createSceneList():' + objScenes.length);
+		this.log.info('createSceneList():' + parentThis.objScenes.length);
 		var options = [];
 		for (var i = 0; i < objScenes.length; i++) {
 			var opt = { 'value': i.toString(), 'label': 'asd' };
@@ -347,9 +347,10 @@ class Obs extends utils.Adapter {
 				}).then(data => {
 					//parentThis.log.info('List of Scenes:' + data.scenes.length);
 					for (var i = 0; i < data.scenes.length; i++) {
-						parentThis.objScenes[i] = data.scenes[i].name;
+						objScenes[i] = data.scenes[i].name;
 					}
 					parentThis.log.info('List of Scenes:' + data.scenes.length);
+					parentThis.log.info('List of Scenes:' + objScenes.length);
 					parentThis.createSceneList();
 				}).catch(error => {
 					parentThis.log.error('connectObs(): Error. Waiting 5 seconds before next try');
