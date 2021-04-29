@@ -13,6 +13,7 @@ const obs = new OBSWebSocket();
 // Load your modules here, e.g.:
 // const fs = require("fs");
 let parentThis;
+let pingQuery;
 
 class Obs extends utils.Adapter {
 
@@ -240,13 +241,14 @@ class Obs extends utils.Adapter {
 
 	setPingSchedule() {
 		this.log.info('setPingSchedule()');
-		var query = setInterval(function () {
+		clearInterval(pingQuery);
+		pingQuery = setInterval(function () {
 			parentThis.log.info('ping');
 			obs.send('GetVersion').then(data => {
 				parentThis.log.info('Ping Version:' + Object.values(data));
-				parentThis.log.info('Ping Version:' + data.length);
 			}).catch(error => {
-				parentThis.log.error('Ping error');
+				parentThis.log.error('Ping error. Disconnecting');
+				parentThis.disconnectOBS();
 			});
 
 		}, 2000);
@@ -311,6 +313,7 @@ class Obs extends utils.Adapter {
 
 	async disconnectOBS() {
 		this.log.info('disconnectOBS()');
+		clearInterval(pingQuery);
 		obs.disconnect();
 		await this.setStateAsync('Connection', false);
 	}
