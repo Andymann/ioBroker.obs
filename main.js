@@ -190,16 +190,13 @@ class Obs extends utils.Adapter {
 
 
 	async createSceneList() {
-		//this.log.info('createSceneList():' + objScenes[1]);
 		this.log.info('createSceneList():' + Object.values(objScenes));
 
 		let objStates = {};
-		//objStates[0] = objScenes[0];
-		//objStates[1] = objScenes[1];
+		let options = [];
 
-		var options = [];
-		for (var i = 0; i < Object.keys(objScenes).length; i++) {
-			var opt = { 'value': i.toString(), 'label': objScenes[i] };
+		for (let i = 0; i < Object.keys(objScenes).length; i++) {
+			let opt = { 'value': i.toString(), 'label': objScenes[i] };
 			options.push(opt);
 			objStates[i] = objScenes[i];
 		}
@@ -223,6 +220,10 @@ class Obs extends utils.Adapter {
 			native: {},
 		});
 
+
+		//----Die Liste ist jetzt synchron mit OBS, jetzt noch die aktuelle Scene setzen:
+		let tmp = await this.getStateAsync('ActiveScene');
+		parentThis.setStateAsync('SceneList', tmp.val);
 	}
 
 	async createStates() {
