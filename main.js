@@ -7,6 +7,7 @@
 // The adapter-core module gives you access to the core ioBroker functions
 // you need to create an adapter
 const utils = require('@iobroker/adapter-core');
+const { TestHarness } = require('@iobroker/testing/build/tests/integration/lib/harness');
 const OBSWebSocket = require('/../../../../home/pi/node_modules/obs-websocket-js');
 let obs;
 
@@ -279,14 +280,6 @@ class Obs extends utils.Adapter {
 				parentThis.log.error('Ping error. Disconnecting');
 				parentThis.disconnectOBS();
 			});
-
-			obs.send('GetCurrentProfile').then(data => {
-				parentThis.log.info('Ping CurrentProfile:' + data['profile-name']);
-			}).catch(error => {
-				parentThis.log.error('Ping error. Disconnecting');
-				parentThis.disconnectOBS();
-			});
-
 		}, 2000);
 	}
 
@@ -294,7 +287,6 @@ class Obs extends utils.Adapter {
 		obs = new OBSWebSocket();
 		this.log.info('connectOBS()');
 		let tmp = await this.getStateAsync('Connection');
-		//this.log.info('connectOBS():' + tmp.val);
 		if (tmp.val == false) {
 			clearInterval(pingQuery);
 			var connectInterval = setInterval(function () {
@@ -306,18 +298,30 @@ class Obs extends utils.Adapter {
 					//return obs.send('GetVersion');
 					return obs.send('GetCurrentScene');
 				}).then(data => {
-					//parentThis.log.info('Version:' + Object.values(data));
 					parentThis.log.info('Current Scene:' + data.name);
 					parentThis.setStateAsync('ActiveScene', data.name);
+				}).then(() => {
+					return obs.send('GetCurrentProfile');
+				}).then(data => {
+					parentThis.log.info('Current Profile:' + data['profile-name']);
+					parentThis.setStateAsync('ActiveProfile', data['profile-name']);
 				}).catch(error => {
 					parentThis.log.error('connectObs(): Error. Waiting 5 seconds before next try');
 				});
+
+
 			}, 5000);
 
 
 			obs.on('SwitchScenes', data => {
 				this.log.info('New Active Scene:' + data.sceneName);
 				parentThis.setStateAsync('ActiveScene', data.sceneName);
+
+			});
+
+			obs.on('ProfileChanged', data => {
+				this.log.info('New Active Profile:' + data.sceneName);
+				parentThis.setStateAsync('ActiveProfile', data.profile);
 
 			});
 
