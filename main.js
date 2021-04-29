@@ -94,6 +94,7 @@ class Obs extends utils.Adapter {
 		result = await this.checkGroupAsync('admin', 'admin');
 		this.log.info('check group user admin group admin: ' + result);
 
+		this.getVersion();
 		this.connectOBS();
 	}
 
@@ -226,6 +227,11 @@ class Obs extends utils.Adapter {
 		*/
 	}
 
+
+	getVersion() {
+		this.log.info('OBS Websocket Version:' + obs.send('GetVersion'));
+	}
+
 	async connectOBS() {
 		this.log.info('connectOBS()');
 
@@ -255,7 +261,7 @@ class Obs extends utils.Adapter {
 					});
 				})
 				.catch(err => { // Promise convention dicates you have a catch on every chain.
-					parentThis.log.error('connectOBS():' + err.val);
+					parentThis.log.error('connectOBS(): Verbindungsv erscuh nicht erfolgreich' + err.val);
 				});
 		}
 
