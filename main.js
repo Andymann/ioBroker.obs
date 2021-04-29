@@ -94,7 +94,7 @@ class Obs extends utils.Adapter {
 		result = await this.checkGroupAsync('admin', 'admin');
 		this.log.info('check group user admin group admin: ' + result);
 
-		//this.getVersion();
+		this.getVersion();
 		this.connectOBS();
 	}
 
@@ -229,7 +229,11 @@ class Obs extends utils.Adapter {
 
 
 	getVersion() {
-		this.log.info('OBS Websocket Version:' + obs.send('GetVersion'));
+		//this.log.info('OBS Websocket Version:' + obs.send('GetVersion'));
+		this.log.info('getVersion()');
+		obs.send('GetVersion').then(data => {
+			parentThis.log.info('version:' + data.toString());
+		})
 	}
 
 	async connectOBS() {
@@ -267,14 +271,11 @@ class Obs extends utils.Adapter {
 				*/
 			obs.connect({ address: this.config.Hostname + ':' + this.config.Port }).then(() => {
 				parentThis.log.info('connected');
+				this.setStateAsync('Connection', true);
 			}).catch(error => {
 				parentThis.log.error('error');
 			});
 		}
-
-
-
-
 	}
 
 	async disconnectOBS() {
