@@ -8,7 +8,7 @@
 // you need to create an adapter
 const utils = require('@iobroker/adapter-core');
 const OBSWebSocket = require('/../../../../home/pi/node_modules/obs-websocket-js');
-const obs = new OBSWebSocket();
+let obs;
 
 // Load your modules here, e.g.:
 // const fs = require("fs");
@@ -256,6 +256,7 @@ class Obs extends utils.Adapter {
 	}
 
 	async connectOBS() {
+		obs = new OBSWebSocket();
 		this.log.info('connectOBS()');
 		let tmp = await this.getStateAsync('Connection');
 		//this.log.info('connectOBS():' + tmp.val);
