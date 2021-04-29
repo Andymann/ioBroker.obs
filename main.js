@@ -267,7 +267,7 @@ class Obs extends utils.Adapter {
 	async disconnectOBS() {
 		this.log.info('disconnectOBS()');
 		obs.disconnect();
-		await this.setStateAsync('Connection', true);
+		await this.setStateAsync('Connection', false);
 	}
 
 	//----Ein State wurde veraendert. wir verarbeiten hier nur ack==FALSE
