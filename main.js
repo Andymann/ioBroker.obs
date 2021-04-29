@@ -14,7 +14,7 @@ const obs = new OBSWebSocket();
 // const fs = require("fs");
 let parentThis;
 let pingQuery;
-let connectQuery;
+
 
 class Obs extends utils.Adapter {
 
@@ -261,21 +261,38 @@ class Obs extends utils.Adapter {
 		//this.log.info('connectOBS():' + tmp.val);
 		if (tmp.val == false) {
 			clearInterval(pingQuery);
-			connectQuery = setInterval(function () {
+			var connectInterval = setInterval(function () {
 				obs.connect({ address: parentThis.config.Hostname + ':' + parentThis.config.Port }).then(() => {
 					parentThis.log.info('connected');
 					parentThis.setStateAsync('Connection', true);
-					parentThis.clearInterval(parentThis.connectQuery);
+					parentThis.clearInterval(connectInterval);
 					parentThis.setPingSchedule();
 					return obs.send('GetVersion');
 				}).then(data => {
-
 					parentThis.log.info('Version:' + Object.values(data));
 				}).catch(error => {
 					parentThis.log.error('connectObs(): error');
 				});
 			}, 5000);
-			/*
+
+
+		} else {
+			this.log.info('connectOBS(): Alredy connected');
+		}
+	}
+
+	async disconnectOBS() {
+		this.log.info('disconnectOBS()');
+		clearInterval(this.pingQuery);
+		obs.disconnect();
+		await this.setStateAsync('Connection', false);
+		this.log.info('waiting 5 seconds before reconnect');
+		var x = setTimeout(function () {
+			parentThis.connectOBS();
+		}, 5000);
+	}
+
+	/*
 			obs.connect({
 				address: this.config.Hostname + ':' + this.config.Port
 			})
@@ -302,31 +319,17 @@ class Obs extends utils.Adapter {
 				});
 				*/
 
-			/*
-			obs.connect({ address: this.config.Hostname + ':' + this.config.Port }).then(() => {
-				parentThis.log.info('connected');
-				this.setStateAsync('Connection', true);
-				this.getVersion();
-			}).catch(error => {
-				parentThis.log.error('error');
-			});
-			*/
+	/*
+	obs.connect({ address: this.config.Hostname + ':' + this.config.Port }).then(() => {
+		parentThis.log.info('connected');
+		this.setStateAsync('Connection', true);
+		this.getVersion();
+	}).catch(error => {
+		parentThis.log.error('error');
+	});
+	*/
 
-		} else {
-			this.log.info('connectOBS(): Alredy connected');
-		}
-	}
 
-	async disconnectOBS() {
-		this.log.info('disconnectOBS()');
-		clearInterval(pingQuery);
-		obs.disconnect();
-		await this.setStateAsync('Connection', false);
-		this.log.info('waiting 5 seconds before reconnect');
-		var x = setTimeout(function () {
-			parentThis.connectOBS();
-		}, 5000);
-	}
 
 	//----Ein State wurde veraendert. wir verarbeiten hier nur ack==FALSE
 	//----d.h.: Aenderungen, die ueber die GUI kommen.
