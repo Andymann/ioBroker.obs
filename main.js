@@ -456,8 +456,9 @@ class Obs extends utils.Adapter {
 	//----Wenn das Routing an der Hardware geaendert wird, kommt die info via parseMSG herein.
 	changeState(id, val, ack) {
 		this.log.info('changeState(). id:' + id + '  val:' + val + '  ack:' + ack);
-		if (id.includes('SceneList')) {
-
+		if ((ack == false) && (id.includes('SceneList'))) {
+			// ---- ack == FALSE: Aenderung via ioBroker. val ist der INDEX der Scene
+			this.log.info('via ioBroker: neue Szene:' + objScenes[val]);
 		}
 
 
