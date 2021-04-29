@@ -7,6 +7,7 @@
 // The adapter-core module gives you access to the core ioBroker functions
 // you need to create an adapter
 const utils = require('@iobroker/adapter-core');
+const { throws } = require('node:assert');
 const OBSWebSocket = require('/../../../../home/pi/node_modules/obs-websocket-js');
 const obs = new OBSWebSocket();
 
@@ -244,9 +245,9 @@ class Obs extends utils.Adapter {
 		this.log.info('setPingSchedule()');
 		clearInterval(pingQuery);
 		pingQuery = setInterval(function () {
-			parentThis.log.info('ping');
+			// parentThis.log.info('ping');
 			obs.send('GetVersion').then(data => {
-				parentThis.log.info('Ping Version:' + Object.values(data));
+				//parentThis.log.info('Ping Version:' + Object.values(data));
 			}).catch(error => {
 				parentThis.log.error('Ping error. Disconnecting');
 				parentThis.disconnectOBS();
@@ -271,11 +272,18 @@ class Obs extends utils.Adapter {
 				}).then(data => {
 					parentThis.log.info('Version:' + Object.values(data));
 				}).catch(error => {
-					parentThis.log.error('connectObs(): error');
+					parentThis.log.error('connectObs(): Error. Waiting 5 seconds before next try');
 				});
 			}, 5000);
 
+			obs.on('SwitchScenes', data => {
+				this.log.info('New Active Scene:' + data.sceneName);
+			});
 
+			// You must add this handler to avoid uncaught exceptions.
+			obs.on('error', err => {
+				console.error('socket error:', err);
+			});
 		} else {
 			this.log.info('connectOBS(): Alredy connected');
 		}
