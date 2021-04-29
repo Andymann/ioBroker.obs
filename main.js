@@ -287,7 +287,7 @@ class Obs extends utils.Adapter {
 				this.setStateAsync('Connection', true);
 				return obs.send('GetSceneList');
 			}).then(data => {
-				parentThis.log.info('Version:' + data.length + ';');
+				parentThis.log.info('Version:' + data);
 			}).catch(error => {
 				parentThis.log.error('error');
 			});
