@@ -44,8 +44,8 @@ class Obs extends utils.Adapter {
 
 		// The adapters config (in the instance object everything under the attribute "native") is accessible via
 		// this.config:
-		this.log.info('config option1: ' + this.config.option1);
-		this.log.info('config option2: ' + this.config.option2);
+		this.log.info('config Hostname: ' + this.config.Hostname);
+		this.log.info('config Port: ' + this.config.Port);
 
 		/*
 		For every state in the system there has to be also an object of type state
@@ -178,8 +178,9 @@ class Obs extends utils.Adapter {
 	// 	}
 	// }
 
-	createStates() {
+	async createStates() {
 		this.log.info('createStates()');
+		/*
 		await this.setObjectNotExistsAsync('Hostname', {
 			type: 'state',
 			common: {
@@ -204,10 +205,7 @@ class Obs extends utils.Adapter {
 			},
 			native: {},
 		});
-
-
-
-
+		*/
 	}
 
 	connectOBS() {
