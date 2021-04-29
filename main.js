@@ -241,11 +241,11 @@ class Obs extends utils.Adapter {
 					return obs.send('GetSceneList');
 				})
 				.then(data => {
-					parentThis.log.info('${data.scenes.length} Available Scenes!');
+					parentThis.log.info('Available Scenes:' + data.scenes.length);
 
 					data.scenes.forEach(scene => {
 						if (scene.name !== data.currentScene) {
-							parentThis.log.info('Found a different scene! Switching to Scene: ${scene.name}');
+							parentThis.log.info('Found a different scene! Switching to Scene:' + scene.name);
 
 							obs.send('SetCurrentScene', {
 								'scene-name': scene.name
@@ -265,6 +265,7 @@ class Obs extends utils.Adapter {
 
 	disconnectOBS() {
 		this.log.info('disconnectOBS()');
+		obs.disconnect();
 	}
 
 	//----Ein State wurde veraendert. wir verarbeiten hier nur ack==FALSE
