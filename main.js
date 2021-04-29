@@ -268,9 +268,11 @@ class Obs extends utils.Adapter {
 					parentThis.setStateAsync('Connection', true);
 					clearInterval(connectInterval);
 					parentThis.setPingSchedule();
-					return obs.send('GetVersion');
+					//return obs.send('GetVersion');
+					return obs.send('GetCurrentScene');
 				}).then(data => {
-					parentThis.log.info('Version:' + Object.values(data));
+					//parentThis.log.info('Version:' + Object.values(data));
+					parentThis.log.info('Current Scene:' + data.name);
 				}).catch(error => {
 					parentThis.log.error('connectObs(): Error. Waiting 5 seconds before next try');
 				});
