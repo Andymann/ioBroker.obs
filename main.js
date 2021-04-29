@@ -307,8 +307,11 @@ class Obs extends utils.Adapter {
 				});
 			}, 5000);
 
+
 			obs.send('GetCurrentProfile').then(data => {
 				parentThis.log.info('Current Profile:' + data['profile-name']);
+			}).catch(error => {
+				parentThis.log.error('GetCurrentProfile(): Error. Waiting 5 seconds before next try');
 			});
 
 			obs.on('SwitchScenes', data => {
