@@ -223,7 +223,7 @@ class Obs extends utils.Adapter {
 
 		//----Die Liste ist jetzt synchron mit OBS, jetzt noch die aktuelle Scene setzen:
 		let tmp = await this.getStateAsync('ActiveScene');
-		parentThis.setStateAsync('SceneList', tmp.val);
+		parentThis.setStateAsync('SceneList', tmp.val, true);
 	}
 
 	async createStates() {
@@ -367,14 +367,14 @@ class Obs extends utils.Adapter {
 
 			obs.on('SwitchScenes', data => {
 				this.log.info('New Active Scene:' + data.sceneName);
-				parentThis.setStateAsync('ActiveScene', data.sceneName);
-				parentThis.setStateAsync('SceneList', data.sceneName);
+				parentThis.setStateAsync('ActiveScene', data.sceneName, true);
+				parentThis.setStateAsync('SceneList', data.sceneName, true);
 
 			});
 
 			obs.on('ProfileChanged', data => {
 				this.log.info('New Active Profile:' + data.sceneName);
-				parentThis.setStateAsync('ActiveProfile', data.profile);
+				parentThis.setStateAsync('ActiveProfile', data.profile, true);
 
 			});
 
@@ -456,6 +456,10 @@ class Obs extends utils.Adapter {
 	//----Wenn das Routing an der Hardware geaendert wird, kommt die info via parseMSG herein.
 	changeState(id, val, ack) {
 		this.log.info('changeState(). id:' + id + '  val:' + val + '  ack:' + ack);
+		if (id.includes('SceneList')) {
+
+		}
+
 
 
 	}
