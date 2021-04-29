@@ -191,6 +191,7 @@ class Obs extends utils.Adapter {
 				role: 'indicator',
 				read: true,
 				write: false,
+				def: false
 			},
 			native: {},
 		});
