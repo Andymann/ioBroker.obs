@@ -193,6 +193,9 @@ class Obs extends utils.Adapter {
 		//this.log.info('createSceneList():' + objScenes[1]);
 		this.log.info('createSceneList():' + Object.values(objScenes));
 
+		let objStates = {};
+		objStates[0] = objScenes[0];
+		objStates[1] = objScenes[1];
 
 		var options = [];
 		for (var i = 0; i < Object.keys(objScenes).length; i++) {
@@ -205,7 +208,7 @@ class Obs extends utils.Adapter {
 			common: {
 				name: 'Output ' + (i + 1).toString().padStart(2, '0') + ' gets Signal from',
 				type: 'number',
-				//states: inputNames,
+				states: objStates,
 				role: 'list',
 				read: true,
 				write: true
