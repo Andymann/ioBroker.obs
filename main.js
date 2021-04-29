@@ -14,6 +14,7 @@ const obs = new OBSWebSocket();
 // const fs = require("fs");
 let parentThis;
 let pingQuery;
+let connectQuery;
 
 class Obs extends utils.Adapter {
 
@@ -256,11 +257,24 @@ class Obs extends utils.Adapter {
 
 	async connectOBS() {
 		this.log.info('connectOBS()');
-
-
 		let tmp = await this.getStateAsync('Connection');
 		//this.log.info('connectOBS():' + tmp.val);
 		if (tmp.val == false) {
+			clearInterval(pingQuery);
+			connectQuery = setInterval(function () {
+				obs.connect({ address: parentThis.config.Hostname + ':' + parentThis.config.Port }).then(() => {
+					parentThis.log.info('connected');
+					parentThis.setStateAsync('Connection', true);
+					parentThis.clearInterval(connectQuery);
+					parentThis.setPingSchedule();
+					return obs.send('GetVersion');
+				}).then(data => {
+
+					parentThis.log.info('Version:' + Object.values(data));
+				}).catch(error => {
+					parentThis.log.error('error');
+				});
+			}, 5000);
 			/*
 			obs.connect({
 				address: this.config.Hostname + ':' + this.config.Port
@@ -298,16 +312,8 @@ class Obs extends utils.Adapter {
 			});
 			*/
 
-			obs.connect({ address: this.config.Hostname + ':' + this.config.Port }).then(() => {
-				parentThis.log.info('connected');
-				this.setStateAsync('Connection', true);
-				this.setPingSchedule();
-				return obs.send('GetVersion');
-			}).then(data => {
-				parentThis.log.info('Version:' + Object.values(data));
-			}).catch(error => {
-				parentThis.log.error('error');
-			});
+		} else {
+			this.log.info('connectOBS(): Alredy connected');
 		}
 	}
 
