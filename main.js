@@ -242,7 +242,13 @@ class Obs extends utils.Adapter {
 		this.log.info('setPingSchedule()');
 		var query = setInterval(function () {
 			parentThis.log.info('ping');
-		}, 1000);
+			obs.send('GetVersion').then(data => {
+				parentThis.log.info('Ping Version:' + Object.values(data));
+			}).catch(error => {
+				parentThis.log.error('Ping error');
+			});
+
+		}, 2000);
 	}
 
 	async connectOBS() {
