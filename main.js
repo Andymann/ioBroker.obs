@@ -267,37 +267,6 @@ class Obs extends utils.Adapter {
 			},
 			native: {},
 		});
-
-
-
-		//let tmp = await this.getStateAsync('obsConnection');
-		//this.log.info('createStates():' + tmp.val);
-		/*
-		await this.setObjectNotExistsAsync('Hostname', {
-			type: 'state',
-			common: {
-				name: 'Localhost',
-				type: 'string',
-				role: 'text',
-				read: true,
-				write: true,
-				def: 'Localhost'
-			},
-			native: {},
-		});
-		await this.setObjectNotExistsAsync('Port', {
-			type: 'state',
-			common: {
-				name: 'Port',
-				type: 'string',
-				role: 'text',
-				read: true,
-				write: true,
-				def: '4444'
-			},
-			native: {},
-		});
-		*/
 	}
 
 
@@ -459,6 +428,13 @@ class Obs extends utils.Adapter {
 		if ((ack == false) && (id.includes('SceneList'))) {
 			// ---- ack == FALSE: Aenderung via ioBroker. val ist der INDEX der Scene
 			this.log.info('via ioBroker: neue Szene:' + objScenes[val]);
+			obs.send('SetCurrentScene', {
+				'scene-name': objScenes[val]
+			}).catch(error => {
+				parentThis.log.error('SetCurrentScene(): Error:' + error.val);
+			});
+
+
 		}
 
 
