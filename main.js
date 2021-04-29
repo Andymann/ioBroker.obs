@@ -265,14 +265,14 @@ class Obs extends utils.Adapter {
 				obs.connect({ address: parentThis.config.Hostname + ':' + parentThis.config.Port }).then(() => {
 					parentThis.log.info('connected');
 					parentThis.setStateAsync('Connection', true);
-					parentThis.clearInterval(connectQuery);
+					parentThis.clearInterval(parentThis.connectQuery);
 					parentThis.setPingSchedule();
 					return obs.send('GetVersion');
 				}).then(data => {
 
 					parentThis.log.info('Version:' + Object.values(data));
 				}).catch(error => {
-					parentThis.log.error('error');
+					parentThis.log.error('connectObs(): error');
 				});
 			}, 5000);
 			/*
