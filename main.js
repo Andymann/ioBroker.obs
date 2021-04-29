@@ -232,7 +232,7 @@ class Obs extends utils.Adapter {
 		//this.log.info('OBS Websocket Version:' + obs.send('GetVersion'));
 		this.log.info('getVersion()');
 		obs.send('GetVersion').then(data => {
-			parentThis.log.info('version:' + data.toString());
+			parentThis.log.info('version:' + data.val);
 		}).catch(error => {
 			parentThis.log.error('getVersion(): Error:' + error.val);
 		});
