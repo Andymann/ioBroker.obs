@@ -233,7 +233,9 @@ class Obs extends utils.Adapter {
 		this.log.info('getVersion()');
 		obs.send('GetVersion').then(data => {
 			parentThis.log.info('version:' + data.toString());
-		})
+		}).catch(error => {
+			parentThis.log.error('getVersion(): Error');
+		});
 	}
 
 	async connectOBS() {
