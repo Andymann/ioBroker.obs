@@ -203,7 +203,7 @@ class Obs extends utils.Adapter {
 				},
 				role: 'list',
 				read: true,
-				write: false
+				write: true
 			},
 			native: {},
 		});
