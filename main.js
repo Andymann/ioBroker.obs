@@ -213,7 +213,8 @@ class Obs extends utils.Adapter {
 				states: objStates,
 				role: 'list',
 				read: true,
-				write: true
+				write: true,
+				def: 'Szene 1'
 			},
 			// Next up: addOn for using the Selection Wdiget in HABPanel
 			stateDescription: {
