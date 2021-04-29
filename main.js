@@ -196,8 +196,8 @@ class Obs extends utils.Adapter {
 			native: {},
 		});
 
-		let tmp = await this.getStateAsync('obsConnection');
-		this.log.info('createStates():' + tmp.val);
+		//let tmp = await this.getStateAsync('obsConnection');
+		//this.log.info('createStates():' + tmp.val);
 		/*
 		await this.setObjectNotExistsAsync('Hostname', {
 			type: 'state',
@@ -228,11 +228,37 @@ class Obs extends utils.Adapter {
 
 	async connectOBS() {
 		this.log.info('connectOBS()');
-		//var tmpConnection = await this.getStateAsync('obs.0.Connection');
-		//this.log.info('connectOBS():' + tmpConnection.toString());
+
 
 		let tmp = await this.getStateAsync('obsConnection');
 		this.log.info('connectOBS():' + tmp.val);
+		if (tmp.val == false) {
+			obs.connect({
+				address: this.config.Hostname + ':' + this.config.Port
+			})
+				.then(() => {
+					parentThis.log.info('Success! We are connected & authenticated.');
+					return obs.send('GetSceneList');
+				})
+				.then(data => {
+					parentThis.log.info('${data.scenes.length} Available Scenes!');
+
+					data.scenes.forEach(scene => {
+						if (scene.name !== data.currentScene) {
+							parentThis.log.info('Found a different scene! Switching to Scene: ${scene.name}');
+
+							obs.send('SetCurrentScene', {
+								'scene-name': scene.name
+							});
+						}
+					});
+				})
+				.catch(err => { // Promise convention dicates you have a catch on every chain.
+					parentThis.log.info(err);
+				});
+		}
+
+
 
 
 	}
