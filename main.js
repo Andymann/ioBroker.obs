@@ -377,9 +377,9 @@ class Obs extends utils.Adapter {
 			});
 
 			obs.on('ScenesChanged', data => {
-				this.log.info('Scenes changed Scene count:' + Object.keys(data).length);
-				for (let i = 0; i < Object.keys(data).length; i++) {
-					this.log.info('Scene ' + i.toString() + ' Name:' + data[i]);
+				this.log.info('Scenes changed Scene count:' + Object.keys(data.scenes).length);
+				for (let i = 0; i < Object.keys(data.scenes).length; i++) {
+					this.log.info('Scene ' + i.toString() + ' Name:' + data.scenes[i]);
 				}
 				//parentThis.setStateAsync('ActiveProfile', data.profile);
 
