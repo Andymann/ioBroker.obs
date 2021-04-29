@@ -285,7 +285,7 @@ class Obs extends utils.Adapter {
 			obs.connect({ address: this.config.Hostname + ':' + this.config.Port }).then(() => {
 				parentThis.log.info('connected');
 				this.setStateAsync('Connection', true);
-				return obs.send('GetSceneList');
+				return obs.send('GetVersion');
 			}).then(data => {
 				parentThis.log.info('Version:' + Object.values(data));
 			}).catch(error => {
