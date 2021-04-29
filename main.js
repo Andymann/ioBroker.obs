@@ -367,6 +367,7 @@ class Obs extends utils.Adapter {
 			obs.on('SwitchScenes', data => {
 				this.log.info('New Active Scene:' + data.sceneName);
 				parentThis.setStateAsync('ActiveScene', data.sceneName);
+				parentThis.setStateAsync('SceneList', data.sceneName);
 
 			});
 
@@ -380,7 +381,7 @@ class Obs extends utils.Adapter {
 				this.log.info('Scenes changed Scene count:' + Object.keys(data.scenes).length);
 				objScenes = {};
 				for (let i = 0; i < Object.keys(data.scenes).length; i++) {
-					this.log.info('Scene ' + i.toString() + ' Name:' + data.scenes[i]['name']);
+					//this.log.info('Scene ' + i.toString() + ' Name:' + data.scenes[i]['name']);
 					objScenes[i] = data.scenes[i]['name'];
 				}
 				this.createSceneList();
