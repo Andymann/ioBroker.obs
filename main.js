@@ -280,6 +280,13 @@ class Obs extends utils.Adapter {
 				parentThis.disconnectOBS();
 			});
 
+			obs.send('GetCurrentProfile').then(data => {
+				parentThis.log.info('Ping CurrentProfile:' + data['profile-name']);
+			}).catch(error => {
+				parentThis.log.error('Ping error. Disconnecting');
+				parentThis.disconnectOBS();
+			});
+
 		}, 2000);
 	}
 
@@ -307,12 +314,6 @@ class Obs extends utils.Adapter {
 				});
 			}, 5000);
 
-
-			obs.send('GetCurrentProfile').then(data => {
-				parentThis.log.info('Current Profile:' + data);
-			}).catch(error => {
-				parentThis.log.error('GetCurrentProfile()');
-			});
 
 			obs.on('SwitchScenes', data => {
 				this.log.info('New Active Scene:' + data.sceneName);
