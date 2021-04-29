@@ -196,7 +196,7 @@ class Obs extends utils.Adapter {
 			native: {},
 		});
 
-		let tmp = await this.getStateAsync('obs.0.obsConnection');
+		let tmp = await this.getStateAsync('obsConnection');
 		this.log.info('createStates():' + tmp.val);
 		/*
 		await this.setObjectNotExistsAsync('Hostname', {
