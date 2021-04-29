@@ -95,7 +95,7 @@ class Obs extends utils.Adapter {
 		this.log.info('check group user admin group admin: ' + result);
 
 		this.getVersion();
-		this.connectOBS();
+		//this.connectOBS();
 	}
 
 	/**
