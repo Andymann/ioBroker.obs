@@ -229,7 +229,7 @@ class Obs extends utils.Adapter {
 
 
 	getVersion() {
-		this.log.info('OBS Websocket Version:' + obs.send('GetVersion').val);
+		this.log.info('OBS Websocket Version:' + obs.send('GetVersion'));
 	}
 
 	async connectOBS() {
@@ -267,7 +267,7 @@ class Obs extends utils.Adapter {
 				*/
 			obs.connect({ address: this.config.Hostname + ':' + this.config.Port }).then(() => {
 				parentThis.log.info('connected');
-			}).catch((error) => {
+			}).catch(error => {
 				parentThis.log.error('error');
 			});
 		}
