@@ -376,8 +376,8 @@ class Obs extends utils.Adapter {
 
 			});
 
-			obs.on('SceneCollectionListChanged', data => {
-				this.log.info('Scene Collection changed Scene count:' + data.length);
+			obs.on('ScenesChanged', data => {
+				this.log.info('Scenes changed Scene count:' + data.length);
 				for (let i = 0; i < data.length; i++) {
 					this.log.info('Scene ' + i.toString() + ' Name:' + data[i]);
 				}
