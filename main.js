@@ -229,7 +229,7 @@ class Obs extends utils.Adapter {
 
 
 	getVersion() {
-		this.log.info('OBS Websocket Version:' + obs.send('GetVersion'));
+		this.log.info('OBS Websocket Version:' + obs.send('GetVersion').val);
 	}
 
 	async connectOBS() {
