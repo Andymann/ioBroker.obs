@@ -223,27 +223,6 @@ class Obs extends utils.Adapter {
 			native: {},
 		});
 
-
-		/*
-				// Kombinatinen von Ein- und Ausgang
-				// ausgehend vom Ausgang ('Ausgang x bekommt Signal von Eingang y')
-				await this.setObjectAsync('SceneList', {
-					type: 'state',
-					common: {
-						name: 'Output ' + (i + 1).toString().padStart(2, '0') + ' gets Signal from',
-						type: 'number',
-						//states: inputNames,
-						role: 'list',
-						read: true,
-						write: true
-					},
-					// Next up: addOn for using the Selection Wdiget in HABPanel
-					stateDescription: {
-						options
-					},
-					native: {},
-				});
-		*/
 	}
 
 	async createStates() {
@@ -396,6 +375,16 @@ class Obs extends utils.Adapter {
 				parentThis.setStateAsync('ActiveProfile', data.profile);
 
 			});
+
+			obs.on('SceneCollectionListChanged', data => {
+				this.log.info('Scene Collection changed Scene count:' + data.length);
+				for (let i = 0; i < data.length; i++) {
+					this.log.info('Scene ' + i.toString() + ' Name:' + data[i]);
+				}
+				//parentThis.setStateAsync('ActiveProfile', data.profile);
+
+			});
+
 
 			/*
 			// You must add this handler to avoid uncaught exceptions.
