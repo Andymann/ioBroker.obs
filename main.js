@@ -335,8 +335,7 @@ class Obs extends utils.Adapter {
 					}
 				}).then(() => {
 					return obs.send('GetVolume', {
-						scource: 'Freestyler.mp3',
-						useDecibel: false
+						source: 'Freestyler.mp3'
 					})
 				}).then(data => {
 					parentThis.log.info('GetVolume:');
