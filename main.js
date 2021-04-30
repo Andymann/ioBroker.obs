@@ -339,6 +339,12 @@ class Obs extends utils.Adapter {
 					})
 				}).then(data => {
 					parentThis.log.info('GetVolume:' + data.volume);
+				}).then(() => {
+					return obs.send('GetMute', {
+						source: 'Freestyler.mp3'
+					})
+				}).then(data => {
+					parentThis.log.info('GetMute:' + data.muted);
 				}).catch(error => {
 					parentThis.log.error('connectObs():' + Object.values(error));
 				});
@@ -372,12 +378,16 @@ class Obs extends utils.Adapter {
 			obs.on('SourceVolumeChanged', data => {
 				this.log.info('Source Volume changed:' + data.sourceName + ':' + data.volume);
 			});
-			/*
+
+			obs.on('SourceMuteStateChanged', data => {
+				this.log.info('Source Mute changed:' + data.sourceName + ':' + data.muted);
+			});
+
 			// You must add this handler to avoid uncaught exceptions.
 			obs.on('error', err => {
 				console.error('socket error:', err);
 			});
-			*/
+
 		} else {
 			this.log.info('connectOBS(): Alredy connected');
 		}
