@@ -333,7 +333,7 @@ class Obs extends utils.Adapter {
 					for (let i = 0; i < data.sources.length; i++) {
 						parentThis.log.info('Sources List:' + i + ':' + data.sources[i].name + ' ' + data.sources[i].type + ' ' + data.sources[i].typeId);
 						obs.send('GetVolume', {
-							'scource': data.sources[i].name
+							'scource': 'Freestyler.mp3'
 						}).then(data => {
 							parentThis.log.info('GetVolume:');
 						});
