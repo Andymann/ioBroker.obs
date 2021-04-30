@@ -330,11 +330,12 @@ class Obs extends utils.Adapter {
 					return obs.send('GetSourcesList');
 				}).then(data => {
 					//parentThis.log.info('Sources List:' + Object.keys(data).length);
-					parentThis.log.info('Sources List:' + Object.values(data));
+					parentThis.log.info('Sources List:' + data);
+					/*
 					for (let i = 1; i < Object.keys(data).length - 2; i++) {
 						parentThis.log.info('Sources List:' + i + ':' + data[i].name);
 					}
-
+					*/
 				}).catch(error => {
 					parentThis.log.error('connectObs(): Error. Waiting 5 seconds before next try');
 				});
