@@ -338,9 +338,9 @@ class Obs extends utils.Adapter {
 						'scource': 'Freestyler.mp3'
 					})
 				}).then(data => {
-					parentThis.log.info('GetVolume:' + data.name);
+					parentThis.log.info('GetVolume:');
 				}).catch(error => {
-					parentThis.log.error('connectObs(): Error. Waiting 5 seconds before next try');
+					parentThis.log.error('connectObs():' + error);
 				});
 
 			}, 5000);
