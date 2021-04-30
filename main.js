@@ -367,10 +367,11 @@ class Obs extends utils.Adapter {
 					objScenes[i] = data.scenes[i]['name'];
 				}
 				this.createSceneList();
-
 			});
 
-
+			obs.on('SourceVolumeChanged', data => {
+				this.log.info('Source Volume changed:' + data.sourceName + ':' + data.volume);
+			});
 			/*
 			// You must add this handler to avoid uncaught exceptions.
 			obs.on('error', err => {
