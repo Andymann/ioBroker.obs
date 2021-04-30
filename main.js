@@ -161,7 +161,7 @@ class Obs extends utils.Adapter {
 	onStateChange(id, state) {
 		if (state) {
 			// The state was changed
-			this.log.info(`state ${id} changed: ${state.val} (ack = ${state.ack})`);
+			//this.log.info(`state ${id} changed: ${state.val} (ack = ${state.ack})`);
 			parentThis.changeState(id, state.val, state.ack);
 		} else {
 			// The state was deleted
@@ -326,6 +326,11 @@ class Obs extends utils.Adapter {
 					//parentThis.log.info('List of Scenes:' + data.scenes.length);
 					//parentThis.log.info('List of Scenes:' + Object.keys(parentThis.objScenes).length);
 					parentThis.createSceneList();
+				}).then(() => {
+					return obs.send('GetSourcesList');
+				}).then(data => {
+					parentThis.log.info('Sources List:' + Object.keys(parentThis.objScenes).length);
+
 				}).catch(error => {
 					parentThis.log.error('connectObs(): Error. Waiting 5 seconds before next try');
 				});
@@ -433,12 +438,7 @@ class Obs extends utils.Adapter {
 			}).catch(error => {
 				parentThis.log.error('SetCurrentScene(): Error:' + error.val);
 			});
-
-
 		}
-
-
-
 	}
 
 }
