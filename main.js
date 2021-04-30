@@ -335,7 +335,7 @@ class Obs extends utils.Adapter {
 						obs.send('GetVolume', {
 							'scource': data.sources[i].name
 						}).then(data => {
-							parentThis.log.info('GetVolume:' + data.name + ' ' + (data.volume).toString());
+							parentThis.log.info('GetVolume:');
 						});
 
 					}
