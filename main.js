@@ -345,6 +345,11 @@ class Obs extends utils.Adapter {
 					})
 				}).then(data => {
 					parentThis.log.info('GetMute:' + data.muted);
+				}).then(() => {
+					return obs.send('SetVolume', {
+						source: 'Freestyler.mp3',
+						volume: 0.001
+					})
 				}).catch(error => {
 					parentThis.log.error('connectObs():' + Object.values(error));
 				});
