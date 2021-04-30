@@ -338,7 +338,7 @@ class Obs extends utils.Adapter {
 						source: 'Freestyler.mp3'
 					})
 				}).then(data => {
-					parentThis.log.info('GetVolume:');
+					parentThis.log.info('GetVolume:' + data.volume);
 				}).catch(error => {
 					parentThis.log.error('connectObs():' + Object.values(error));
 				});
