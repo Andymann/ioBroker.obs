@@ -340,7 +340,7 @@ class Obs extends utils.Adapter {
 				}).then(data => {
 					parentThis.log.info('GetVolume:');
 				}).catch(error => {
-					parentThis.log.error('connectObs():' + error);
+					parentThis.log.error('connectObs():' + Object.values(error));
 				});
 
 			}, 5000);
