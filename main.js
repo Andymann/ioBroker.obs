@@ -312,13 +312,16 @@ class Obs extends utils.Adapter {
 
 
 			var connectInterval = setInterval(function () {
-				obs.connect({ address: parentThis.config.Hostname + ':' + parentThis.config.Port, password: parentThis.config.password }).then(() => {
+				obs.connect({ address: parentThis.config.Hostname + ':' + parentThis.config.Port }).then(() => {
 					parentThis.log.info('connectOBS(): connected');
 					parentThis.setStateAsync('Connection', true);
 					clearInterval(connectInterval);
 					parentThis.setPingSchedule();
-					//return obs.send('GetVersion');
-					return obs.send('GetCurrentScene');
+					return obs.send('GetAuthRequired');
+					//return obs.send('GetCurrentScene');
+				}).then(data => {
+					parentThis.log.info('GetAuthRequired()' + data.authRequired + ' ' + data.challenge + ' ' + data.salt);
+
 				}).then(data => {
 					parentThis.log.info('Current Scene:' + data.name);
 					parentThis.setStateAsync('ActiveScene', data.name);
