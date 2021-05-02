@@ -351,14 +351,15 @@ class Obs extends utils.Adapter {
 				}).then(data => {
 					for (let i = 0; i < data.sources.length; i++) {
 						parentThis.log.info('Sources List:' + i + ':' + data.sources[i].name + ' ' + data.sources[i].type + ' ' + data.sources[i].typeId);
-						parentThis.objSources[i] = data.sources[i];
+						objSources[i] = data.sources[i];
 					}
+					parentThis.log.info('Sources List Length:' + objSources.length);
 				}).then(() => {
 					return obs.send('GetSourceTypesList');
 				}).then(data => {
 					for (let i = 0; i < data.types.length; i++) {
 						//parentThis.log.info('getSourceTypes List:' + i + ':' + data.types[i].displayName + ' ' + data.types[i].type + ' ' + data.types[i].typeId + ' hasAudio:' + data.types[i].caps.hasAudio);
-						parentThis.objSourceTypes[i] = data.types[i];
+						objSourceTypes[i] = data.types[i];
 					}
 					//parentThis.createSourceListWithVolumeFader();
 				}).then(() => {
