@@ -210,7 +210,7 @@ class Obs extends utils.Adapter {
 					//parentThis.log.info('objSources ' + i + ' ' + objSources[i]['name'] + ' hasAudio:' + objSourceTypes[j]['caps']['hasAudio']);
 					if (objSourceTypes[j]['caps']['hasAudio'] == true) {
 						parentThis.log.info(objSources[i]['name'] + ' bekommt einen Volume-Fader');
-						await this.setObjectAsync('ActiveProfile', {
+						await this.setObjectAsync('Volume_' + objSources[i]['name'], {
 							type: 'state',
 							common: {
 								name: 'Volume_' + objSources[i]['name'],
