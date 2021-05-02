@@ -203,26 +203,31 @@ class Obs extends utils.Adapter {
 
 		for (let i = 0; i < Object.keys(objSources).length; i++) {
 			//parentThis.log.info('objSources ' + i + ' ' + objSources[i]['name'] + ' typeID:' + objSources[i]['typeId']);
-
 			for (let j = 0; j < Object.keys(objSourceTypes).length; j++) {
 				let string1 = objSourceTypes[j]['typeId'].toString();
 				let string2 = objSources[i]['typeId'].toString();
 				if (string1.localeCompare(string2) == 0) {
 					//parentThis.log.info('objSources ' + i + ' ' + objSources[i]['name'] + ' hasAudio:' + objSourceTypes[j]['caps']['hasAudio']);
 					if (objSourceTypes[j]['caps']['hasAudio'] == true) {
-						parentThis.log.info(objSources[i]['name'] + ' bekommt einen Volume Fader');
+						parentThis.log.info(objSources[i]['name'] + ' bekommt einen Volume-Fader');
+						await this.setObjectAsync('ActiveProfile', {
+							type: 'state',
+							common: {
+								name: 'Volume_' + objSources[i]['name'],
+								type: 'number',
+								role: '',
+								min: 0,
+								max: 100,
+								read: true,
+								write: false
+							},
+							native: {},
+						});
 					}
 					break;
 				}
 			}
-
 		}
-
-		/*
-		for (let j = 0; j < Object.keys(objSourceTypes).length; j++) {
-			parentThis.log.info('objSourceTypeds ' + j + ' ' + objSourceTypes[j]['displayName'] + ' ' + objSourceTypes[j]['typeId']);
-		}
-		*/
 	}
 
 	async createSceneList() {
