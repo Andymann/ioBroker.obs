@@ -202,10 +202,11 @@ class Obs extends utils.Adapter {
 		// objSourceTypes ist die Liste mit den Moeglichkeiten der jeweiligen Plattform.
 
 		for (let i = 0; i < Object.keys(objSources).length; i++) {
-			parentThis.log.info('objSources ' + i + ' ' + objSources[i]['name'] + ' type:' + objSources[i]['type']);
+			//parentThis.log.info('objSources ' + i + ' ' + objSources[i]['name'] + ' type:' + objSources[i]['type']);
 			for (let j = 0; j < Object.keys(objSourceTypes).length; j++) {
 				if (objSourceTypes[j]['typeID'] == objSources[i]['typeID']) {
 					parentThis.log.info('objSources ' + i + ' ' + objSources[i]['name'] + ' hasAudio:' + objSourceTypes[j]['caps']['hasAudio']);
+					break;
 				}
 			}
 		}
