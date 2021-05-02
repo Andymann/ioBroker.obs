@@ -18,6 +18,7 @@ let sActiveScene = '';
 
 let objScenes = {};
 let objSources = {}; //Holds all the available Sources. e.g.: objSources[0]['name']
+let objSourceTypes = {}; //Maybe a source's typeId differes per OS (e.g. 'coreaudio')
 
 class Obs extends utils.Adapter {
 
@@ -327,7 +328,6 @@ class Obs extends utils.Adapter {
 				}).then(data => {
 					//parentThis.log.info('List of Scenes:' + data.scenes.length);
 					for (var i = 0; i < data.scenes.length; i++) {
-						//objScenes[i] = data.scenes[i].name;
 						objScenes[i] = data.scenes[i];
 					}
 					parentThis.createSceneList();
@@ -338,7 +338,13 @@ class Obs extends utils.Adapter {
 						parentThis.log.info('Sources List:' + i + ':' + data.sources[i].name + ' ' + data.sources[i].type + ' ' + data.sources[i].typeId);
 						objSources[i] = data.sources[i];
 					}
-					//parentThis.log.info('***TEST *** Sources List:' + objSources[0]['name'] + ' ' + objSources[0]['type'] + ' ' + objSources[0]['typeId']);
+				}).then(() => {
+					return obs.send('GetSourceTypesList');
+				}).then(data => {
+					for (let i = 0; i < data.types.length; i++) {
+						parentThis.log.info('getSourceTypes List:' + i + ':' + data.types[i].displayName + ' ' + data.types[i].type + ' ' + data.types[i].typeId + ' hasAudio:' + data.types[i].caps.hasAudio);
+						objSourceTypes[i] = data.types[i];
+					}
 				}).then(() => {
 					return obs.send('GetVolume', {
 						source: 'Freestyler.mp3'
