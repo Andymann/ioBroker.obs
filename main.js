@@ -335,10 +335,10 @@ class Obs extends utils.Adapter {
 				}).then(data => {
 					for (let i = 0; i < data.sources.length; i++) {
 						parentThis.log.info('Sources List:' + i + ':' + data.sources[i].name + ' ' + data.sources[i].type + ' ' + data.sources[i].typeId);
-						let tmpObj = { 'name': data.sources[i].name, 'type': data.sources[i].type, 'typeId': data.sources[i].typeId };
-						objSources[i] = tmpObj; //data.sources[i];
-						parentThis.log('**** TEST:' + objSources[i].type);
+						objSources[i] = data.sources[i];
 					}
+					parentThis.log.info('***TEST *** Sources List:' + objSources[0]['name']);
+
 				}).then(() => {
 					return obs.send('GetVolume', {
 						source: 'Freestyler.mp3'
