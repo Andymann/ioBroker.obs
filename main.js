@@ -209,7 +209,7 @@ class Obs extends utils.Adapter {
 				if (string1.localeCompare(string2) == 0) {
 					//parentThis.log.info('objSources ' + i + ' ' + objSources[i]['name'] + ' hasAudio:' + objSourceTypes[j]['caps']['hasAudio']);
 					if (objSourceTypes[j]['caps']['hasAudio'] == true) {
-						parentThis.log.info(objSources[i]['name'] + ' bekommt einen Volume-Fader');
+						//parentThis.log.info(objSources[i]['name'] + ' bekommt einen Volume-Fader');
 						let dpName = objSources[i]['name'].toString().replace('.', '_');
 						await this.setObjectAsync('Volume.' + dpName, {
 							type: 'state',
@@ -441,11 +441,12 @@ class Obs extends utils.Adapter {
 			});
 
 			obs.on('SourceVolumeChanged', data => {
-				this.log.info('Source Volume changed:' + data.sourceName + ':' + data.volume);
+				this.log.info('Source Volume changed:' + data.sourceName.replace('.', '_') + ':' + data.volume);
+
 			});
 
 			obs.on('SourceMuteStateChanged', data => {
-				this.log.info('Source Mute changed:' + data.sourceName + ':' + data.muted);
+				this.log.info('Source Mute changed:' + data.sourceName.replace('.', '_') + ':' + data.muted);
 			});
 
 			// You must add this handler to avoid uncaught exceptions.
