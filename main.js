@@ -201,7 +201,7 @@ class Obs extends utils.Adapter {
 		// objSources beschreibt die tatsaechlich vorhanden Objekte
 		// objSourceTypes ist die Liste mit den Moeglichkeiten der jeweiligen Plattform.
 
-		for (let i = 0; i < objSources.length; i++) {
+		for (let i = 0; i < Object.keys(objSources).length; i++) {
 			this.log.info('objSources ' + i + ' ' + objSources[i]['name'] + ' type:' + objSources[i]['type']);
 		}
 
@@ -353,7 +353,7 @@ class Obs extends utils.Adapter {
 						parentThis.log.info('Sources List:' + i + ':' + data.sources[i].name + ' ' + data.sources[i].type + ' ' + data.sources[i].typeId);
 						objSources[i] = data.sources[i];
 					}
-					parentThis.log.info('Sources List Length:' + Object.keys(objSources).length);
+					//parentThis.log.info('Sources List Length:' + Object.keys(objSources).length);
 				}).then(() => {
 					return obs.send('GetSourceTypesList');
 				}).then(data => {
@@ -361,7 +361,7 @@ class Obs extends utils.Adapter {
 						//parentThis.log.info('getSourceTypes List:' + i + ':' + data.types[i].displayName + ' ' + data.types[i].type + ' ' + data.types[i].typeId + ' hasAudio:' + data.types[i].caps.hasAudio);
 						objSourceTypes[i] = data.types[i];
 					}
-					//parentThis.createSourceListWithVolumeFader();
+					parentThis.createSourceListWithVolumeFader();
 				}).then(() => {
 					return obs.send('GetVolume', {
 						source: 'Freestyler.mp3'
