@@ -214,7 +214,7 @@ class Obs extends utils.Adapter {
 						await this.setObjectAsync('Volume.' + dpName, {
 							type: 'state',
 							common: {
-								name: 'Volume_' + objSources[i]['name'],
+								name: 'Volume_' + dpName,
 								type: 'number',
 								role: 'level',
 								min: 0,
