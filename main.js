@@ -224,13 +224,16 @@ class Obs extends utils.Adapter {
 							},
 							native: {},
 						});
+
+						//---- eine definierte Subscription auf ienen State IST eine bessere Idee:
+						this.log.info('adding Subscription for state Volume.' + dpName);
+						this.subscribeStates('Volume.' + dpName);
 					}
 					break;
 				}
 			}
 		}
-		//---- eine definierte Subscription auf ienen State IST eine bessere Idee:
-		this.subscribeStates('Volume.*');
+
 
 	}
 
