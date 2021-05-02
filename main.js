@@ -17,7 +17,7 @@ let pingQuery;
 let sActiveScene = '';
 
 let objScenes = {};
-
+let objSources = {};
 
 class Obs extends utils.Adapter {
 
@@ -329,8 +329,6 @@ class Obs extends utils.Adapter {
 					for (var i = 0; i < data.scenes.length; i++) {
 						objScenes[i] = data.scenes[i].name;
 					}
-					//parentThis.log.info('List of Scenes:' + data.scenes.length);
-					//parentThis.log.info('List of Scenes:' + Object.keys(parentThis.objScenes).length);
 					parentThis.createSceneList();
 				}).then(() => {
 					return obs.send('GetSourcesList');
@@ -338,6 +336,8 @@ class Obs extends utils.Adapter {
 					//parentThis.log.info('Sources List:' + data.sources.length);
 					for (let i = 0; i < data.sources.length; i++) {
 						parentThis.log.info('Sources List:' + i + ':' + data.sources[i].name + ' ' + data.sources[i].type + ' ' + data.sources[i].typeId);
+						objSources[i] = data.sources[i];
+						parentThis.log('**** TEST:' + objSources[i].type);
 					}
 				}).then(() => {
 					return obs.send('GetVolume', {
