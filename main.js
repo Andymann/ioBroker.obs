@@ -205,7 +205,7 @@ class Obs extends utils.Adapter {
 			//parentThis.log.info('objSources ' + i + ' ' + objSources[i]['name'] + ' typeID:' + objSources[i]['typeId']);
 
 			for (let j = 0; j < Object.keys(objSourceTypes).length; j++) {
-				if (parentThis.objSourceTypes[j]['typeID'].localCompare(parentThis.objSources[i]['typeID']) == 0) {
+				if (objSourceTypes[j]['typeID'].localCompare(objSources[i]['typeID']) == 0) {
 					parentThis.log.info('objSources ' + i + ' ' + parentThis.objSources[i]['name'] + ' hasAudio:' + parentThis.objSourceTypes[j]['caps']['hasAudio']);
 					break;
 				}
