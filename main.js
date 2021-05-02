@@ -306,7 +306,9 @@ class Obs extends utils.Adapter {
 			obs.send('GetAuthRequired', {
 			}).then(data => {
 				parentThis.log.info('Auth Required:' + data.authRequired + ' ' + data.challenge + ' ' + data.salt);
-			})
+			}).catch(error => {
+				parentThis.log.error('Auth Required:():' + Object.values(error));
+			});
 
 
 			var connectInterval = setInterval(function () {
