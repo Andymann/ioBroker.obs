@@ -203,6 +203,11 @@ class Obs extends utils.Adapter {
 
 		for (let i = 0; i < Object.keys(objSources).length; i++) {
 			parentThis.log.info('objSources ' + i + ' ' + objSources[i]['name'] + ' type:' + objSources[i]['type']);
+			for (let j = 0; j < Object.keys(objSourceTypes).length; j++) {
+				if (objSourceTypes[j]['displayName'] == objSources[i]['name']) {
+					parentThis.log.info('objSources ' + i + ' ' + objSources[i]['name'] + ' hasAudio:' + objSourceTypes[i]['caps']['hasAudio']);
+				}
+			}
 		}
 
 	}
@@ -350,7 +355,7 @@ class Obs extends utils.Adapter {
 					return obs.send('GetSourcesList');
 				}).then(data => {
 					for (let i = 0; i < data.sources.length; i++) {
-						parentThis.log.info('Sources List:' + i + ':' + data.sources[i].name + ' ' + data.sources[i].type + ' ' + data.sources[i].typeId);
+						//parentThis.log.info('Sources List:' + i + ':' + data.sources[i].name + ' ' + data.sources[i].type + ' ' + data.sources[i].typeId);
 						objSources[i] = data.sources[i];
 					}
 					//parentThis.log.info('Sources List Length:' + Object.keys(objSources).length);
