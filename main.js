@@ -18,7 +18,7 @@ let sActiveScene = '';
 
 let objScenes = {};
 let objSources = {}; //Holds all the available Sources. e.g.: objSources[0]['name']
-let objSourceTypes = {}; //Maybe a source's typeId differes per OS (e.g. 'coreaudio')
+let objSourceTypes = {}; //Possible SourceTypes. Might differ between operating systems
 
 class Obs extends utils.Adapter {
 
@@ -105,6 +105,10 @@ class Obs extends utils.Adapter {
 
 
 		this.connectOBS();
+
+		//Die Reihenfolge ist nicht einheitlich. innerhalb connectOBS() wurde u.a. objSourceTypes mit Inhalt gefuellt
+		//Daraus bauen wir jetzt Datenpunkte, die eine Steuerung des Volumes erlauben.
+		this.createSourceListWithVolumeFader();
 	}
 
 	/**
@@ -191,6 +195,16 @@ class Obs extends utils.Adapter {
 	// }
 
 
+	async createSourceListWithVolumeFader() {
+		this.log.info('createSourceListWithVolumeFader()');
+
+		// objSources beschreibt die tatsaechlich vorhanden Objekte
+		// objSourceTypes ist die Liste mit den Moeglichkeiten der jeweiligen Plattform.
+		for (let i = 0; i < objSources.length; i++) {
+			this.log.info('objSources ' + i + ' ' + objSources[i]['name'] + ' type:' + objSources[i]['type']);
+		}
+
+	}
 
 	async createSceneList() {
 		this.log.info('createSceneList()'/* + Object.values(objScenes)*/);
@@ -342,7 +356,7 @@ class Obs extends utils.Adapter {
 					return obs.send('GetSourceTypesList');
 				}).then(data => {
 					for (let i = 0; i < data.types.length; i++) {
-						parentThis.log.info('getSourceTypes List:' + i + ':' + data.types[i].displayName + ' ' + data.types[i].type + ' ' + data.types[i].typeId + ' hasAudio:' + data.types[i].caps.hasAudio);
+						//parentThis.log.info('getSourceTypes List:' + i + ':' + data.types[i].displayName + ' ' + data.types[i].type + ' ' + data.types[i].typeId + ' hasAudio:' + data.types[i].caps.hasAudio);
 						objSourceTypes[i] = data.types[i];
 					}
 				}).then(() => {
