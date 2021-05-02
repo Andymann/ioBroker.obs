@@ -196,7 +196,7 @@ class Obs extends utils.Adapter {
 
 
 	async createSourceListWithVolumeFader() {
-		this.log.info('createSourceListWithVolumeFader():' + objSources.length);
+		this.log.info('createSourceListWithVolumeFader():' + parentThis.objSources.length);
 
 		// objSources beschreibt die tatsaechlich vorhanden Objekte
 		// objSourceTypes ist die Liste mit den Moeglichkeiten der jeweiligen Plattform.
@@ -351,14 +351,14 @@ class Obs extends utils.Adapter {
 				}).then(data => {
 					for (let i = 0; i < data.sources.length; i++) {
 						parentThis.log.info('Sources List:' + i + ':' + data.sources[i].name + ' ' + data.sources[i].type + ' ' + data.sources[i].typeId);
-						objSources[i] = data.sources[i];
+						parentThis.objSources[i] = data.sources[i];
 					}
 				}).then(() => {
 					return obs.send('GetSourceTypesList');
 				}).then(data => {
 					for (let i = 0; i < data.types.length; i++) {
 						//parentThis.log.info('getSourceTypes List:' + i + ':' + data.types[i].displayName + ' ' + data.types[i].type + ' ' + data.types[i].typeId + ' hasAudio:' + data.types[i].caps.hasAudio);
-						objSourceTypes[i] = data.types[i];
+						parentThis.objSourceTypes[i] = data.types[i];
 					}
 					parentThis.createSourceListWithVolumeFader();
 				}).then(() => {
