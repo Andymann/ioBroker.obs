@@ -218,7 +218,7 @@ class Obs extends utils.Adapter {
 								type: 'number',
 								role: 'level',
 								min: 0,
-								max: 100,
+								max: 1,
 								read: true,
 								write: false
 							},
