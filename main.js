@@ -206,7 +206,7 @@ class Obs extends utils.Adapter {
 
 			for (let j = 0; j < Object.keys(objSourceTypes).length; j++) {
 				if (parentThis.objSourceTypes[j]['typeID'].localCompare(parentThis.objSources[i]['typeID']) == 0) {
-					parentThis.log.info('objSources ' + i + ' ' + objSources[i]['name'] + ' hasAudio:' + objSourceTypes[j]['caps']['hasAudio']);
+					parentThis.log.info('objSources ' + i + ' ' + parentThis.objSources[i]['name'] + ' hasAudio:' + parentThis.objSourceTypes[j]['caps']['hasAudio']);
 					break;
 				}
 			}
@@ -443,7 +443,7 @@ class Obs extends utils.Adapter {
 			});
 
 		} else {
-			this.log.info('connectOBS(): Alredy connected');
+			this.log.info('connectOBS(): ady connected');
 		}
 	}
 
