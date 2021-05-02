@@ -70,7 +70,8 @@
 	},
 	"native": {
 		"Hostname": "localhost",
-		"Port": "4444"
+		"Port": "4444",
+		"Password": ""
 	},
 	"objects": [],
 	"instanceObjects": []

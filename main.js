@@ -51,6 +51,8 @@ class Obs extends utils.Adapter {
 		// this.config:
 		this.log.info('config Hostname: ' + this.config.Hostname);
 		this.log.info('config Port: ' + this.config.Port);
+		this.log.info('config Password: ' + this.config.Password);
+
 
 		/*
 		For every state in the system there has to be also an object of type state
@@ -409,42 +411,7 @@ class Obs extends utils.Adapter {
 		}, 5000);
 	}
 
-	/*
-			obs.connect({
-				address: this.config.Hostname + ':' + this.config.Port
-			})
-				.then(() => {
-					parentThis.log.info('Success! We are connected & authenticated.');
-					this.setStateAsync('Connection', true);
-					return obs.send('GetSceneList');
-				})
-				.then(data => {
-					parentThis.log.info('Available Scenes:' + data.scenes.length);
-	
-					data.scenes.forEach(scene => {
-						if (scene.name !== data.currentScene) {
-							parentThis.log.info('Found a different scene! Switching to Scene:' + scene.name);
-	
-							obs.send('SetCurrentScene', {
-								'scene-name': scene.name
-							});
-						}
-					});
-				})
-				.catch(err => { // Promise convention dicates you have a catch on every chain.
-					parentThis.log.error('connectOBS(): Verbindungsversuch nicht erfolgreich.' + err);
-				});
-				*/
 
-	/*
-	obs.connect({ address: this.config.Hostname + ':' + this.config.Port }).then(() => {
-		parentThis.log.info('connected');
-		this.setStateAsync('Connection', true);
-		this.getVersion();
-	}).catch(error => {
-		parentThis.log.error('error');
-	});
-	*/
 
 
 
