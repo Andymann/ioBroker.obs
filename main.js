@@ -360,7 +360,7 @@ class Obs extends utils.Adapter {
 						//parentThis.log.info('getSourceTypes List:' + i + ':' + data.types[i].displayName + ' ' + data.types[i].type + ' ' + data.types[i].typeId + ' hasAudio:' + data.types[i].caps.hasAudio);
 						parentThis.objSourceTypes[i] = data.types[i];
 					}
-					parentThis.createSourceListWithVolumeFader();
+					//parentThis.createSourceListWithVolumeFader();
 				}).then(() => {
 					return obs.send('GetVolume', {
 						source: 'Freestyler.mp3'
