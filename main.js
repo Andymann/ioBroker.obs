@@ -337,8 +337,7 @@ class Obs extends utils.Adapter {
 						parentThis.log.info('Sources List:' + i + ':' + data.sources[i].name + ' ' + data.sources[i].type + ' ' + data.sources[i].typeId);
 						objSources[i] = data.sources[i];
 					}
-					parentThis.log.info('***TEST *** Sources List:' + objSources[0]['name'] + ' ' + objSources[0]['type'] + ' ' + objSources[0]['typeId']);
-
+					//parentThis.log.info('***TEST *** Sources List:' + objSources[0]['name'] + ' ' + objSources[0]['type'] + ' ' + objSources[0]['typeId']);
 				}).then(() => {
 					return obs.send('GetVolume', {
 						source: 'Freestyler.mp3'
@@ -356,6 +355,12 @@ class Obs extends utils.Adapter {
 						source: 'Freestyler.mp3',
 						volume: 0.001
 					})
+				}).then(() => {
+					return obs.send('GetVolume', {
+						source: 'Bild'
+					})
+				}).then(data => {
+					parentThis.log.info('GetVolume (Bild):' + data.volume);
 				}).catch(error => {
 					parentThis.log.error('connectObs():' + Object.values(error));
 				});
