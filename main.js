@@ -17,7 +17,7 @@ let pingQuery;
 let sActiveScene = '';
 
 let objScenes = {};
-let objSources = {};
+let objSources = {}; //Holds all the available Sources. e.g.: objSources[0]['name']
 
 class Obs extends utils.Adapter {
 
@@ -198,9 +198,9 @@ class Obs extends utils.Adapter {
 		let options = [];
 
 		for (let i = 0; i < Object.keys(objScenes).length; i++) {
-			let opt = { 'value': i.toString(), 'label': objScenes[i] };
+			let opt = { 'value': i.toString(), 'label': objScenes[i]['name'] };
 			options.push(opt);
-			objStates[i] = objScenes[i];
+			objStates[i] = objScenes[i]['name'];
 		}
 
 		// @ts-ignore
@@ -327,7 +327,8 @@ class Obs extends utils.Adapter {
 				}).then(data => {
 					//parentThis.log.info('List of Scenes:' + data.scenes.length);
 					for (var i = 0; i < data.scenes.length; i++) {
-						objScenes[i] = data.scenes[i].name;
+						//objScenes[i] = data.scenes[i].name;
+						objScenes[i] = data.scenes[i];
 					}
 					parentThis.createSceneList();
 				}).then(() => {
@@ -356,6 +357,7 @@ class Obs extends utils.Adapter {
 						volume: 0.001
 					})
 				}).then(() => {
+					//----Technisch möglich, return: 1
 					return obs.send('GetVolume', {
 						source: 'Bild'
 					})
@@ -386,7 +388,7 @@ class Obs extends utils.Adapter {
 				objScenes = {};
 				for (let i = 0; i < Object.keys(data.scenes).length; i++) {
 					//this.log.info('Scene ' + i.toString() + ' Name:' + data.scenes[i]['name']);
-					objScenes[i] = data.scenes[i]['name'];
+					objScenes[i] = data.scenes[i];//['name'];
 				}
 				this.createSceneList();
 			});
@@ -431,9 +433,10 @@ class Obs extends utils.Adapter {
 		this.log.info('changeState(). id:' + id + '  val:' + val + '  ack:' + ack);
 		if ((ack == false) && (id.includes('SceneList'))) {
 			// ---- ack == FALSE: Aenderung via ioBroker. val ist der INDEX der Scene
-			this.log.info('via ioBroker: neue Szene:' + objScenes[val]);
+			//this.log.info('via ioBroker: neue Szene:' + objScenes[val]);
+			this.log.info('via ioBroker: neue Szene:' + objScenes[val]['name']);
 			obs.send('SetCurrentScene', {
-				'scene-name': objScenes[val]
+				'scene-name': objScenes[val]['name']
 			}).catch(error => {
 				parentThis.log.error('SetCurrentScene(): Error:' + error.val);
 			});
