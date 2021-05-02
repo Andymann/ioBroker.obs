@@ -108,7 +108,7 @@ class Obs extends utils.Adapter {
 
 		//Die Reihenfolge ist nicht einheitlich. innerhalb connectOBS() wurde u.a. objSourceTypes mit Inhalt gefuellt
 		//Daraus bauen wir jetzt Datenpunkte, die eine Steuerung des Volumes erlauben.
-		await this.createSourceListWithVolumeFader();
+
 	}
 
 	/**
@@ -197,13 +197,13 @@ class Obs extends utils.Adapter {
 
 	async createSourceListWithVolumeFader() {
 		this.log.info('createSourceListWithVolumeFader()');
-		/*
-				// objSources beschreibt die tatsaechlich vorhanden Objekte
-				// objSourceTypes ist die Liste mit den Moeglichkeiten der jeweiligen Plattform.
-				for (let i = 0; i < parentThis.objSources.length; i++) {
-					this.log.info('objSources ' + i + ' ' + objSources[i]['name'] + ' type:' + objSources[i]['type']);
-				}
-		*/
+
+		// objSources beschreibt die tatsaechlich vorhanden Objekte
+		// objSourceTypes ist die Liste mit den Moeglichkeiten der jeweiligen Plattform.
+		for (let i = 0; i < objSources.length; i++) {
+			this.log.info('objSources ' + i + ' ' + objSources[i]['name'] + ' type:' + objSources[i]['type']);
+		}
+
 	}
 
 	async createSceneList() {
@@ -359,6 +359,7 @@ class Obs extends utils.Adapter {
 						//parentThis.log.info('getSourceTypes List:' + i + ':' + data.types[i].displayName + ' ' + data.types[i].type + ' ' + data.types[i].typeId + ' hasAudio:' + data.types[i].caps.hasAudio);
 						objSourceTypes[i] = data.types[i];
 					}
+					parentThis.createSourceListWithVolumeFader();
 				}).then(() => {
 					return obs.send('GetVolume', {
 						source: 'Freestyler.mp3'
