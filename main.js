@@ -450,7 +450,7 @@ class Obs extends utils.Adapter {
 				// replacing . with _ to correspond with names of states
 				let sStateName = data.sourceName.replace('.', '_');
 				this.log.info('Source Volume changed:' + sStateName + ':' + data.volume);
-				parentThis.setStateAsync(sStateName, data.volume, true);
+				parentThis.setStateAsync('Volume.' + sStateName, data.volume, true);
 			});
 
 			obs.on('SourceMuteStateChanged', data => {
