@@ -229,6 +229,9 @@ class Obs extends utils.Adapter {
 				}
 			}
 		}
+		//---- eine definierte Subscription auf ienen State IST eine bessere Idee:
+		this.subscribeStates('Volume.*');
+
 	}
 
 	async createSceneList() {
@@ -441,11 +444,13 @@ class Obs extends utils.Adapter {
 			});
 
 			obs.on('SourceVolumeChanged', data => {
+				// replacing . with _ to correspond with names of states
 				this.log.info('Source Volume changed:' + data.sourceName.replace('.', '_') + ':' + data.volume);
 
 			});
 
 			obs.on('SourceMuteStateChanged', data => {
+				// replacing . with _ to correspond with names of states
 				this.log.info('Source Mute changed:' + data.sourceName.replace('.', '_') + ':' + data.muted);
 			});
 
@@ -475,7 +480,7 @@ class Obs extends utils.Adapter {
 
 
 	//----Ein State wurde veraendert. wir verarbeiten hier nur ack==FALSE
-	//----d.h.: Aenderungen, die ueber die GUI kommen.
+	//----d.h.: Aenderungen, die ueber die Iobroker	 kommen.
 	//----Wenn das Routing an der Hardware geaendert wird, kommt die info via parseMSG herein.
 	changeState(id, val, ack) {
 		this.log.info('changeState(). id:' + id + '  val:' + val + '  ack:' + ack);
