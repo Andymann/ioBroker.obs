@@ -200,8 +200,8 @@ class Obs extends utils.Adapter {
 
 		// objSources beschreibt die tatsaechlich vorhanden Objekte
 		// objSourceTypes ist die Liste mit den Moeglichkeiten der jeweiligen Plattform.
-		for (let i = 0; i < objSources.length; i++) {
-			this.log.info('objSources ' + i + ' ' + objSources[i]['name'] + ' type:' + objSources[i]['type']);
+		for (let i = 0; i < parentThis.objSources.length; i++) {
+			this.log.info('objSources ' + i + ' ' + parentThis.objSources[i]['name'] + ' type:' + parentThis.objSources[i]['type']);
 		}
 
 	}
