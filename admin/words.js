@@ -15,7 +15,7 @@ systemDictionary = {
 		'de': 'Port'
 	},
 	'Password': {
-		'en': 'Password (optional)',
-		'de': 'Passwort (optional)'
+		'en': 'Password (not implemented yet)',
+		'de': 'Passwort (noch nicht implementiert)'
 	}
 };
