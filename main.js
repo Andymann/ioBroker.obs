@@ -104,7 +104,7 @@ class Obs extends utils.Adapter {
 		//this.log.info('check group user admin group admin: ' + result);
 
 
-		this.connectOBS();
+		await this.connectOBS();
 
 		//Die Reihenfolge ist nicht einheitlich. innerhalb connectOBS() wurde u.a. objSourceTypes mit Inhalt gefuellt
 		//Daraus bauen wir jetzt Datenpunkte, die eine Steuerung des Volumes erlauben.
@@ -201,7 +201,7 @@ class Obs extends utils.Adapter {
 		// objSources beschreibt die tatsaechlich vorhanden Objekte
 		// objSourceTypes ist die Liste mit den Moeglichkeiten der jeweiligen Plattform.
 		for (let i = 0; i < parentThis.objSources.length; i++) {
-			this.log.info('objSources ' + i + ' ' + parentThis.objSources[i]['name'] + ' type:' + parentThis.objSources[i]['type']);
+			this.log.info('objSources ' + i + ' ' + objSources[i]['name'] + ' type:' + objSources[i]['type']);
 		}
 
 	}
