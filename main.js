@@ -208,7 +208,7 @@ class Obs extends utils.Adapter {
 				let string1 = objSourceTypes[j]['typeId'].toString();
 				let string2 = objSources[i]['typeId'].toString();
 				if (string1.localeCompare(string2) == 0) {
-					parentThis.log.info('objSources ' + i + ' ' + parentThis.objSources[i]['name'] + ' hasAudio:' + parentThis.objSourceTypes[j]['caps']['hasAudio']);
+					parentThis.log.info('objSources ' + i + ' ' + objSources[i]['name'] + ' hasAudio:' + objSourceTypes[j]['caps']['hasAudio']);
 					break;
 				}
 			}
