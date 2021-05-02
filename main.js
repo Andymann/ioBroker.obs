@@ -196,11 +196,12 @@ class Obs extends utils.Adapter {
 
 
 	async createSourceListWithVolumeFader() {
-		this.log.info('createSourceListWithVolumeFader()');
+		this.log.info('createSourceListWithVolumeFader():' + objSources.length);
 
 		// objSources beschreibt die tatsaechlich vorhanden Objekte
 		// objSourceTypes ist die Liste mit den Moeglichkeiten der jeweiligen Plattform.
-		for (let i = 0; i < parentThis.objSources.length; i++) {
+
+		for (let i = 0; i < objSources.length; i++) {
 			this.log.info('objSources ' + i + ' ' + objSources[i]['name'] + ' type:' + objSources[i]['type']);
 		}
 
