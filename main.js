@@ -303,7 +303,10 @@ class Obs extends utils.Adapter {
 		if (tmp.val == false) {
 			clearInterval(pingQuery);
 			var connectInterval = setInterval(function () {
-				obs.connect({ address: parentThis.config.Hostname + ':' + parentThis.config.Port }).then(() => {
+				//bs.connect({ address: 'localhost:4444', password: '$up3rSecretP@ssw0rd' });
+
+
+				obs.connect({ address: parentThis.config.Hostname + ':' + parentThis.config.Port, password: parentThis.config.password }).then(() => {
 					parentThis.log.info('connectOBS(): connected');
 					parentThis.setStateAsync('Connection', true);
 					clearInterval(connectInterval);
