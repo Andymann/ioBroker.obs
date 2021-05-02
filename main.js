@@ -302,14 +302,6 @@ class Obs extends utils.Adapter {
 		let tmp = await this.getStateAsync('Connection');
 		if (tmp.val == false) {
 			clearInterval(pingQuery);
-			/*
-			obs.send('GetAuthRequired', {
-			}).then(data => {
-				parentThis.log.info('Auth Required:' + data.authRequired + ' ' + data.challenge + ' ' + data.salt);
-			}).catch(error => {
-				parentThis.log.error('Auth Required:():' + Object.values(error));
-			});
-			*/
 
 			var connectInterval = setInterval(function () {
 				obs.connect({ address: parentThis.config.Hostname + ':' + parentThis.config.Port }).then(() => {
@@ -317,10 +309,10 @@ class Obs extends utils.Adapter {
 					parentThis.setStateAsync('Connection', true);
 					clearInterval(connectInterval);
 					parentThis.setPingSchedule();
-					return obs.send('GetAuthRequired');
-					//return obs.send('GetCurrentScene');
-				}).then(data => {
-					parentThis.log.info('GetAuthRequired()' + data.authRequired + ' ' + data.challenge + ' ' + data.salt);
+					//return obs.send('GetAuthRequired');
+					return obs.send('GetCurrentScene');
+					//}).then(data => {
+					//	parentThis.log.info('GetAuthRequired()' + data.authRequired + ' ' + data.challenge + ' ' + data.salt);
 
 				}).then(data => {
 					parentThis.log.info('Current Scene:' + data.name);
