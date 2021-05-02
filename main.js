@@ -302,10 +302,14 @@ class Obs extends utils.Adapter {
 		let tmp = await this.getStateAsync('Connection');
 		if (tmp.val == false) {
 			clearInterval(pingQuery);
+
+			obs.send('GetAuthRequired', {
+			}).then(data => {
+				parentThis.log.info('Auth Required:' + data.authRequired + ' ' + data.challenge + ' ' + data.salt);
+			})
+
+
 			var connectInterval = setInterval(function () {
-				//bs.connect({ address: 'localhost:4444', password: '$up3rSecretP@ssw0rd' });
-
-
 				obs.connect({ address: parentThis.config.Hostname + ':' + parentThis.config.Port, password: parentThis.config.password }).then(() => {
 					parentThis.log.info('connectOBS(): connected');
 					parentThis.setStateAsync('Connection', true);
