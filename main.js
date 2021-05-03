@@ -504,7 +504,7 @@ class Obs extends utils.Adapter {
 		}
 		if ((ack == false) && (id.includes('Volume.'))) {
 
-			let x = parentThis.getObject(id);
+			let x = parentThis.getObjectAsync(id);
 			this.log.info('ERNIE *****' + x);
 			//this.log.info('via ioBroker: neue Szene:' + objScenes[val]);
 			//   obs.0.Volume.VLC-Videoquelle
