@@ -498,6 +498,16 @@ class Obs extends utils.Adapter {
 				parentThis.log.error('SetCurrentScene(): Error:' + error.val);
 			});
 		}
+		if ((ack == false) && (id.includes('Volume.'))) {
+			//this.log.info('via ioBroker: neue Szene:' + objScenes[val]);
+			let sName =
+				this.log.info('via ioBroker:' + id);
+			obs.send('SetCurrentScene', {
+				'scene-name': objScenes[val]['name']
+			}).catch(error => {
+				parentThis.log.error('SetCurrentScene(): Error:' + error.val);
+			});
+		}
 	}
 
 }
