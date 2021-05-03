@@ -235,13 +235,14 @@ class Obs extends utils.Adapter {
 							source: objSources[i]['name']
 						}).then(data => {
 							parentThis.log.info('createSourceListWithVolumeFader: getVolume auf ' + objSources[i]['name'] + '=' + data.volume);
+							parentThis.setStateAsync(objSources[i]['name'], data.volume, true);
 						}).catch(error => {
 							parentThis.log.error('createSourceListWithVolumeFader():' + Object.values(error));
 						});
 
 
 						//---- eine definierte Subscription auf ienen State IST eine bessere Idee:
-						this.log.info('adding Subscription for state Volume.' + dpName);
+						//this.log.info('adding Subscription for state Volume.' + dpName);
 						this.subscribeStates('Volume.' + dpName);
 					}
 					break;
