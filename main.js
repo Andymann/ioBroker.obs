@@ -229,6 +229,10 @@ class Obs extends utils.Adapter {
 							native: {},
 						});
 
+						//---- eine definierte Subscription auf ienen State IST eine bessere Idee:
+						//this.log.info('adding Subscription for state Volume.' + dpName);
+						this.subscribeStates('Volume.' + dpName);
+
 						//---- Um synchron mit OBS zu sein, fragen wir den aktuellen Wert ab und schreiben ihn 
 						//---- in den Datenpunkt, bevor eine Subscription existiert.
 						obs.send('GetVolume', {
@@ -239,11 +243,6 @@ class Obs extends utils.Adapter {
 						}).catch(error => {
 							parentThis.log.error('createSourceListWithVolumeFader():' + Object.values(error));
 						});
-
-
-						//---- eine definierte Subscription auf ienen State IST eine bessere Idee:
-						//this.log.info('adding Subscription for state Volume.' + dpName);
-						this.subscribeStates('Volume.' + dpName);
 					}
 					break;
 				}
