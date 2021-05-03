@@ -239,7 +239,7 @@ class Obs extends utils.Adapter {
 							source: objSources[i]['name']
 						}).then(data => {
 							parentThis.log.info('createSourceListWithVolumeFader: getVolume auf ' + objSources[i]['name'] + '=' + data.volume);
-							let sDPName = 'obs.' + parentThis.instance + '.' + dpName;
+							let sDPName = 'obs.' + parentThis.instance + '.Volume.' + dpName;
 							parentThis.log.info(sDPName);
 							parentThis.setStateAsync(sDPName, data.volume, true);
 
