@@ -408,16 +408,16 @@ class Obs extends utils.Adapter {
 					})
 				}).then(data => {
 					parentThis.log.info('GetMute:' + data.muted);
-				}).then(() => {
-					return obs.send('SetVolume', {
-						source: 'Freestyler.mp3',
-						volume: 0.001
-					})
-				}).then(() => {
-					//----Technisch möglich, return: 1
-					return obs.send('GetVolume', {
-						source: 'Bild'
-					})
+					//}).then(() => {
+					//	return obs.send('SetVolume', {
+					//		source: 'Freestyler.mp3',
+					//		volume: 0.001
+					//	})
+					//}).then(() => {
+					//	//----Technisch möglich, return: 1
+					//	return obs.send('GetVolume', {
+					//		source: 'Bild'
+					//	})
 				}).then(data => {
 					parentThis.log.info('GetVolume (Bild):' + data.volume);
 				}).catch(error => {
