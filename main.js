@@ -410,18 +410,18 @@ class Obs extends utils.Adapter {
 						objSourceTypes[i] = data.types[i];
 					}
 					parentThis.createSourceListWithVolumeFader();
-				}).then(() => {
-					return obs.send('GetVolume', {
-						source: 'Freestyler.mp3'
-					})
-				}).then(data => {
-					parentThis.log.info('TEST: GetVolume Freestyler.mp3:' + data.volume);
-				}).then(() => {
-					return obs.send('GetMute', {
-						source: 'Freestyler.mp3'
-					})
-				}).then(data => {
-					parentThis.log.info('TEST GetMute: Freestyler.mp3' + data.muted);
+					//}).then(() => {
+					//	return obs.send('GetVolume', {
+					//		source: 'Freestyler.mp3'
+					//	})
+					//}).then(data => {
+					//	parentThis.log.info('TEST: GetVolume Freestyler.mp3:' + data.volume);
+					//}).then(() => {
+					//	return obs.send('GetMute', {
+					//		source: 'Freestyler.mp3'
+					//	})
+					//}).then(data => {
+					//	parentThis.log.info('TEST GetMute: Freestyler.mp3' + data.muted);
 					//}).then(() => {
 					//	return obs.send('SetVolume', {
 					//		source: 'Freestyler.mp3',
