@@ -511,6 +511,8 @@ class Obs extends utils.Adapter {
 				obs.send('SetVolume', {
 					soure: data.common.name,
 					volume: val
+				}).catch(error => {
+					parentThis.log.error('setVolume():' + Object.values(error));
 				});
 
 			});
