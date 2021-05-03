@@ -235,6 +235,7 @@ class Obs extends utils.Adapter {
 
 						//---- Um synchron mit OBS zu sein, fragen wir den aktuellen Wert ab und schreiben ihn 
 						//---- in den Datenpunkt, bevor eine Subscription existiert.
+						/*
 						obs.send('GetVolume', {
 							source: objSources[i]['name']
 						}).then(data => {
@@ -243,6 +244,7 @@ class Obs extends utils.Adapter {
 						}).catch(error => {
 							parentThis.log.error('createSourceListWithVolumeFader():' + Object.values(error));
 						});
+						*/
 					}
 					break;
 				}
