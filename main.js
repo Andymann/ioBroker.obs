@@ -38,6 +38,7 @@ class Obs extends utils.Adapter {
 
 		//this.on('error', this.onError.bind(this));
 		parentThis = this;
+
 	}
 
 
@@ -242,6 +243,11 @@ class Obs extends utils.Adapter {
 							//parentThis.setStateAsync(objSources[i]['name'], data.volume, true);
 							//----Jetzt den State suchen, dessen common.name == objSources[i]['name'] und dessen Wert setzen
 							parentThis.log.info('Instance:' + parentThis.instance);
+							let sInstName = 'obs' + instance + 'Volume';
+							const testDps = parentThis.$('state[id=*.Volume.*]');
+							testDps.each(function (id, i) {
+								parentThis.log.debug(id + ': ' + id);
+							});
 							//let testDps = $('state[id=*.Volume.*]');
 							//parentThis.log.info('FILTERTEST:' + Object.keys(testDps).length);
 							//testDps.each(function (id, i) {
