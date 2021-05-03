@@ -7,7 +7,8 @@
 // The adapter-core module gives you access to the core ioBroker functions
 // you need to create an adapter
 const utils = require('@iobroker/adapter-core');
-const OBSWebSocket = require('/../../../../home/pi/node_modules/obs-websocket-js');
+//const OBSWebSocket = require('/../../../../home/pi/node_modules/obs-websocket-js');
+const OBSWebSocket = require('obs-websocket-js');
 let obs;
 
 // Load your modules here, e.g.:
@@ -229,21 +230,19 @@ class Obs extends utils.Adapter {
 							native: {},
 						});
 
-						//---- eine definierte Subscription auf ienen State IST eine bessere Idee:
+						//---- eine definierte Subscription auf einen State IST eine bessere Idee:
 						//this.log.info('adding Subscription for state Volume.' + dpName);
 						this.subscribeStates('Volume.' + dpName);
 
-						//---- Um synchron mit OBS zu sein, fragen wir den aktuellen Wert ab und schreiben ihn 
-						//---- in den Datenpunkt, bevor eine Subscription existiert.
+						//---- Um nach dem Start synchron mit OBS zu sein, fragen wir den aktuellen Wert ab und schreiben ihn 
+						//---- in den Datenpunkt.
 						obs.send('GetVolume', {
 							source: objSources[i]['name']
 						}).then(data => {
-							parentThis.log.info('createSourceListWithVolumeFader: getVolume auf ' + objSources[i]['name'] + '=' + data.volume);
+							//parentThis.log.info('createSourceListWithVolumeFader: getVolume auf ' + objSources[i]['name'] + '=' + data.volume);
 							let sDPName = 'obs.' + parentThis.instance + '.Volume.' + dpName;
-							parentThis.log.info(sDPName);
+							//parentThis.log.info(sDPName);
 							parentThis.setStateAsync(sDPName, data.volume, true);
-
-
 						}).catch(error => {
 							parentThis.log.error('createSourceListWithVolumeFader():' + Object.values(error) + ' ' + error.val);
 						});
