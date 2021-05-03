@@ -500,13 +500,13 @@ class Obs extends utils.Adapter {
 		}
 		if ((ack == false) && (id.includes('Volume.'))) {
 			//this.log.info('via ioBroker: neue Szene:' + objScenes[val]);
-			let sName =
-				this.log.info('via ioBroker:' + id);
-			obs.send('SetCurrentScene', {
-				'scene-name': objScenes[val]['name']
-			}).catch(error => {
-				parentThis.log.error('SetCurrentScene(): Error:' + error.val);
-			});
+			//let sName =
+			this.log.info('via ioBroker:' + id);
+			//obs.send('SetCurrentScene', {
+			//'scene-name': objScenes[val]['name']
+			//}).catch (error => {
+			//	parentThis.log.error('SetCurrentScene(): Error:' + error.val);
+			//});
 		}
 	}
 
