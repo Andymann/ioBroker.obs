@@ -210,11 +210,15 @@ class Obs extends utils.Adapter {
 					//parentThis.log.info('objSources ' + i + ' ' + objSources[i]['name'] + ' hasAudio:' + objSourceTypes[j]['caps']['hasAudio']);
 					if (objSourceTypes[j]['caps']['hasAudio'] == true) {
 						//parentThis.log.info(objSources[i]['name'] + ' bekommt einen Volume-Fader');
+						//Es ist technisch machbar, in OBS eine Quelle mit '.' im Namen zu haben (auch NUR '.'!).
+						//Innerhalb ioBroker fuehrt das zu Problemen. deswegen wird alles nach einem Punkt in einem 
+						//zusaetzlichen Attribut des Datenpunktes gespeichert.
 						let dpName = objSources[i]['name'].toString().replace('.', '_');
+
 						await this.setObjectAsync('Volume.' + dpName, {
 							type: 'state',
 							common: {
-								name: 'Volume_' + dpName,
+								name: objSources[i]['name'].toString(),//'Volume_' + dpName,
 								type: 'number',
 								role: 'level',
 								min: 0,
