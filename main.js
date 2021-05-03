@@ -241,7 +241,8 @@ class Obs extends utils.Adapter {
 							parentThis.log.info('createSourceListWithVolumeFader: getVolume auf ' + objSources[i]['name'] + '=' + data.volume);
 							//parentThis.setStateAsync(objSources[i]['name'], data.volume, true);
 							//----Jetzt den State suchen, dessen common.name == objSources[i]['name'] und dessen Wert setzen
-							let testDps = parentThis.$('state[id=*.Volume.*]');
+							parentThis.log.info('Instance:' + instance);
+							let testDps = $('state[id=*.Volume.*]');
 							parentThis.log.info('FILTERTEST:' + Object.keys(testDps).length);
 							testDps.each(function (id, i) {
 								//console.log(id + ': ' + getState(id));
