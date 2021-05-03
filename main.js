@@ -235,16 +235,15 @@ class Obs extends utils.Adapter {
 
 						//---- Um synchron mit OBS zu sein, fragen wir den aktuellen Wert ab und schreiben ihn 
 						//---- in den Datenpunkt, bevor eine Subscription existiert.
-						/*
+
 						obs.send('GetVolume', {
 							source: objSources[i]['name']
 						}).then(data => {
 							parentThis.log.info('createSourceListWithVolumeFader: getVolume auf ' + objSources[i]['name'] + '=' + data.volume);
-							parentThis.setStateAsync(objSources[i]['name'], data.volume, true);
+							//parentThis.setStateAsync(objSources[i]['name'], data.volume, true);
 						}).catch(error => {
 							parentThis.log.error('createSourceListWithVolumeFader():' + Object.values(error));
 						});
-						*/
 					}
 					break;
 				}
@@ -414,13 +413,13 @@ class Obs extends utils.Adapter {
 						source: 'Freestyler.mp3'
 					})
 				}).then(data => {
-					parentThis.log.info('GetVolume:' + data.volume);
+					parentThis.log.info('TEST: GetVolume Freestyler.mp3:' + data.volume);
 				}).then(() => {
 					return obs.send('GetMute', {
 						source: 'Freestyler.mp3'
 					})
 				}).then(data => {
-					parentThis.log.info('GetMute:' + data.muted);
+					parentThis.log.info('TERST GetMute: Freestyler.mp3' + data.muted);
 					//}).then(() => {
 					//	return obs.send('SetVolume', {
 					//		source: 'Freestyler.mp3',
