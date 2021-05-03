@@ -449,7 +449,7 @@ class Obs extends utils.Adapter {
 			obs.on('SourceVolumeChanged', data => {
 				// replacing . with _ to correspond with names of states
 				let sStateName = data.sourceName.replace('.', '_');
-				this.log.info('Source Volume changed:' + sStateName + ':' + data.volume);
+				//this.log.info('Source Volume changed:' + sStateName + ':' + data.volume);
 				parentThis.setStateAsync('Volume.' + sStateName, data.volume, true);
 			});
 
@@ -500,8 +500,10 @@ class Obs extends utils.Adapter {
 		}
 		if ((ack == false) && (id.includes('Volume.'))) {
 			//this.log.info('via ioBroker: neue Szene:' + objScenes[val]);
-			//let sName =
-			this.log.info('via ioBroker:' + id);
+			//   obs.0.Volume.VLC-Videoquelle
+			//   
+			let sName = id.substring(id.indexOf('Volume.') + 7); //VLC-Videoquelle OBACHT bei states mit '.'
+			this.log.info('via ioBroker:' + sName);
 			//obs.send('SetCurrentScene', {
 			//'scene-name': objScenes[val]['name']
 			//}).catch (error => {
