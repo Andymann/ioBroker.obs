@@ -1,45 +1,25 @@
 {
 	"common": {
 		"name": "obs",
-		"version": "0.0.1",
+		"version": "1.0.1",
 		"news": {
 			"0.0.1": {
 				"en": "initial release",
-				"de": "Erstveröffentlichung",
-				"ru": "Начальная версия",
-				"pt": "lançamento inicial",
-				"nl": "Eerste uitgave",
-				"fr": "Première version",
-				"it": "Versione iniziale",
-				"es": "Versión inicial",
-				"pl": "Pierwsze wydanie",
-				"zh-cn": "首次出版"
+				"de": "Erstveröffentlichung"
+			},
+			"1.0.1": {
+				"en": "first working release",
+				"de": "Erste funktionierende Version"
 			}
 		},
 		"title": "Open Broadcast Studio",
 		"titleLang": {
 			"en": "Open Broadcast Studio",
-			"de": "Öffnen Sie Broadcast Studio",
-			"ru": "Студия открытого вещания",
-			"pt": "Open Broadcast Studio",
-			"nl": "Open Broadcast Studio",
-			"fr": "Ouvrez Broadcast Studio",
-			"it": "Apri Broadcast Studio",
-			"es": "Open Broadcast Studio",
-			"pl": "Otwórz Broadcast Studio",
-			"zh-cn": "开放广播工作室"
+			"de": "Öffnen Sie Broadcast Studio"
 		},
 		"desc": {
-			"en": "obs",
-			"de": "obs",
-			"ru": "Наблюдения",
-			"pt": "obs",
-			"nl": "obs",
-			"fr": "obs",
-			"it": "oss",
-			"es": "obs",
-			"pl": "obs",
-			"zh-cn": "肥胖"
+			"en": "Adpter for Open Broadcast Studio",
+			"de": "Adapter für Open Broadcast Studio"
 		},
 		"authors": [
 			"Andy Fischer <info@Andyland.info>"
