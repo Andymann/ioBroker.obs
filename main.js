@@ -214,7 +214,6 @@ class Obs extends utils.Adapter {
 						//Innerhalb ioBroker fuehrt das zu Problemen. deswegen wird alles nach einem Punkt in einem 
 						//zusaetzlichen Attribut des Datenpunktes gespeichert.
 						let dpName = objSources[i]['name'].toString().replace('.', '_');
-
 						await this.setObjectAsync('Volume.' + dpName, {
 							type: 'state',
 							common: {
@@ -241,6 +240,13 @@ class Obs extends utils.Adapter {
 						}).then(data => {
 							parentThis.log.info('createSourceListWithVolumeFader: getVolume auf ' + objSources[i]['name'] + '=' + data.volume);
 							//parentThis.setStateAsync(objSources[i]['name'], data.volume, true);
+							//----Jetzt den State suchen, dessen common.name == objSources[i]['name'] und dessen Wert setzen
+							let testDps = parentThis.$('state[id=*.Volume.*]');
+							testDps.each(function (id, i) {
+								//console.log(id + ': ' + getState(id));
+								parentThis.log.info('FILTERTEST:' + id);
+							});
+
 						}).catch(error => {
 							parentThis.log.error('createSourceListWithVolumeFader():' + Object.values(error));
 						});
@@ -419,7 +425,7 @@ class Obs extends utils.Adapter {
 						source: 'Freestyler.mp3'
 					})
 				}).then(data => {
-					parentThis.log.info('TERST GetMute: Freestyler.mp3' + data.muted);
+					parentThis.log.info('TEST GetMute: Freestyler.mp3' + data.muted);
 					//}).then(() => {
 					//	return obs.send('SetVolume', {
 					//		source: 'Freestyler.mp3',
