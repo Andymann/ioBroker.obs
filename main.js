@@ -504,8 +504,15 @@ class Obs extends utils.Adapter {
 		}
 		if ((ack == false) && (id.includes('Volume.'))) {
 
-			let x = parentThis.getObjectAsync(id).then((data) => {
-				this.log.info('ERNIE *****' + data.common.name);
+			parentThis.getObjectAsync(id).then((data) => {
+				// das Attribut 'name' hat keine Regeln hinsichtlich Sonderzeichen, die 
+				// fuer uns problematisch sind.
+				this.log.info(data.common.name);
+				obs.send('SetVolume', {
+					soure: data.common.name,
+					volume: val
+				});
+
 			});
 			//this.log.info('ERNIE *****' + x);
 			//this.log.info('via ioBroker: neue Szene:' + objScenes[val]);
