@@ -242,6 +242,7 @@ class Obs extends utils.Adapter {
 							//parentThis.setStateAsync(objSources[i]['name'], data.volume, true);
 							//----Jetzt den State suchen, dessen common.name == objSources[i]['name'] und dessen Wert setzen
 							let testDps = parentThis.$('state[id=*.Volume.*]');
+							parentThis.log.info('FILTERTEST:' + Object.keys(testDps).length);
 							testDps.each(function (id, i) {
 								//console.log(id + ': ' + getState(id));
 								parentThis.log.info('FILTERTEST:' + id);
