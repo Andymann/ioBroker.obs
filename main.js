@@ -169,7 +169,6 @@ class Obs extends utils.Adapter {
 		if (state) {
 			// The state was changed
 			//this.log.info(`state ${id} changed: ${state.val} (ack = ${state.ack})`);
-			this.log.info('************ :' + state.common.name + '    ' + Object.values(state));
 			parentThis.changeState(id, state.val, state.ack);
 		} else {
 			// The state was deleted
@@ -504,6 +503,9 @@ class Obs extends utils.Adapter {
 			});
 		}
 		if ((ack == false) && (id.includes('Volume.'))) {
+
+			let x = parentThis.getObject(id);
+			this.log.info('ERNIE *****' + x.common.name);
 			//this.log.info('via ioBroker: neue Szene:' + objScenes[val]);
 			//   obs.0.Volume.VLC-Videoquelle
 			//   
