@@ -509,8 +509,8 @@ class Obs extends utils.Adapter {
 				// fuer uns problematisch sind.
 				this.log.info(data.common.name);
 				obs.send('SetVolume', {
-					soure: data.common.name,
-					volume: val
+					soure: 'Freestyler.mp3',
+					volume: 1.0
 				}).catch(error => {
 					parentThis.log.error('setVolume():' + Object.values(error));
 				});
