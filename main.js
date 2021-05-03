@@ -218,7 +218,7 @@ class Obs extends utils.Adapter {
 						await this.setObjectAsync('Volume.' + dpName, {
 							type: 'state',
 							common: {
-								name: objSources[i]['name'].toString(),//'Volume_' + dpName,
+								name: objSources[i]['name'],	//kann Punkte etc. enthalten
 								type: 'number',
 								role: 'level',
 								min: 0,
@@ -228,6 +228,17 @@ class Obs extends utils.Adapter {
 							},
 							native: {},
 						});
+
+						//---- Um synchron mit OBS zu sein, fragen wir den aktuellen Wert ab und schreiben ihn 
+						//---- in den Datenpunkt, bevor eine Subscription existiert.
+						obs.send('GetVolume', {
+							source: objSources[i]['name']
+						}).then(data => {
+							parentThis.log.info('createSourceListWithVolumeFader: getVolume auf ' + objSources[i]['name'] + '=' + data.volume);
+						}).catch(error => {
+							parentThis.log.error('createSourceListWithVolumeFader():' + Object.values(error));
+						});
+
 
 						//---- eine definierte Subscription auf ienen State IST eine bessere Idee:
 						this.log.info('adding Subscription for state Volume.' + dpName);
@@ -418,8 +429,8 @@ class Obs extends utils.Adapter {
 					//	return obs.send('GetVolume', {
 					//		source: 'Bild'
 					//	})
-				}).then(data => {
-					parentThis.log.info('GetVolume (Bild):' + data.volume);
+					//}).then(data => {
+					//	parentThis.log.info('GetVolume (Bild):' + data.volume);
 				}).catch(error => {
 					parentThis.log.error('connectObs():' + Object.values(error));
 				});
@@ -516,17 +527,6 @@ class Obs extends utils.Adapter {
 				});
 
 			});
-			//this.log.info('ERNIE *****' + x);
-			//this.log.info('via ioBroker: neue Szene:' + objScenes[val]);
-			//   obs.0.Volume.VLC-Videoquelle
-			//   
-			let sName = id.substring(id.indexOf('Volume.') + 7); //VLC-Videoquelle OBACHT bei states mit '.'
-			this.log.info('via ioBroker:' + sName);
-			//obs.send('SetCurrentScene', {
-			//'scene-name': objScenes[val]['name']
-			//}).catch (error => {
-			//	parentThis.log.error('SetCurrentScene(): Error:' + error.val);
-			//});
 		}
 	}
 
